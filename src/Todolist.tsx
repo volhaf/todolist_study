@@ -1,5 +1,6 @@
 import React from 'react';
 import {TaskType} from "./App";
+import {Button} from "./Button";
 
 type TodolistPropsType = {
     title: string;
@@ -13,7 +14,7 @@ export function Todolist ( {title, tasks}: TodolistPropsType) {
                 <h3>{title}</h3>
             <div>
                 <input/>
-                <button>X</button>
+                <Button title={'+'}/>
             </div>
             {tasks.length === 0 ? (
                 <p>no tasks</p>
@@ -24,16 +25,15 @@ export function Todolist ( {title, tasks}: TodolistPropsType) {
                                 <li key={t.id}>
                                     <input type='checkbox' checked={t.isDone}/>
                                     <span>{t.title}</span>
-                                    <button>x</button>
+                                    <Button title={'x'}/>
                                 </li>)
                         })}
                     </ul>)
             }
             <div>
-                <button>All</button>
-                <button>Active</button>
-                <button>Completed</button>
-
+                <Button title= {"All"}/>
+                <Button title= {"Active"}/>
+                <Button title= {"Completed"}/>
             </div>
 
         </div>
