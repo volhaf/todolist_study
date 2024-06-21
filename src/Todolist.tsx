@@ -1,10 +1,12 @@
 import React from 'react';
+import {TaskType} from "./App";
 
 type TodolistPropsType = {
     title: string;
+    tasks: TaskType[]
 }
 
-export function Todolist ( {title}: TodolistPropsType) {
+export function Todolist ( {title, tasks}: TodolistPropsType) {
     return (
         <div className="todolist">
                 <h3>{title}</h3>
@@ -13,21 +15,14 @@ export function Todolist ( {title}: TodolistPropsType) {
                 <button>X</button>
             </div>
             <ul>
-                <li>
-                    <input type='checkbox' checked={true}/>
-                    <span>cheese</span>
-                    <button>x</button>
-                </li>
-                <li>
-                    <input type='checkbox' checked={true}/>
-                    <span>milk</span>
-                    <button>x</button>
-                </li>
-                <li>
-                    <input type='checkbox' checked={false}/>
-                    <span>fish</span>
-                    <button>x</button>
-                </li>
+                {tasks.map (t=> {
+                    return (
+                        <li>
+                            <input type='checkbox' checked={true}/>
+                            <span>{t.title}</span>
+                            <button>x</button>
+                        </li>)
+                })}
             </ul>
             <div>
                 <button>All</button>
