@@ -51,10 +51,10 @@ let taskFilter = tasks;
           taskFilter = tasks.filter(t => t.isDone === true)
     }
 
-    function addTask () {
+    function addTask (title: string) {
        const newTask = {
            id: v1(),
-           title: 'new',
+           title: title,
            isDone: false,
        }
         const newList = [...tasks, newTask]

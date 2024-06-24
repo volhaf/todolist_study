@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {FilterType, TaskType} from "./App";
 import {Button} from "./Button";
 
@@ -7,19 +7,24 @@ type TodolistPropsType = {
     tasks: TaskType[]
     removeTask: (taskId: string) => void
     changeFilter: (filter: FilterType) => void
-    addTask: () => void
+    addTask: (title: string) => void
 }
 
 export function Todolist ( {title, tasks, removeTask, changeFilter, addTask}: TodolistPropsType) {
+const [taskInput, setTaskInput] = useState('')
 
     return (
         <div className="todolist">
                 <h3>{title}</h3>
             <div>
-                <input/>
+                <input value={taskInput}
+                       onChange={event=>setTaskInput(event.currentTarget.value)}
+                />
                 <Button title={'+'}
-                        OnClickHandler={addTask}/>
+                        OnClickHandler={()=>{addTask(taskInput)}}
+                />
             </div>
+
             {tasks.length === 0 ? (
                 <p>no tasks</p>
                 ):(
