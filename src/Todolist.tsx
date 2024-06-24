@@ -5,18 +5,20 @@ import {Button} from "./Button";
 type TodolistPropsType = {
     title: string;
     tasks: TaskType[]
-    removeTask: (taskId: number) => void
+    removeTask: (taskId: string) => void
     changeFilter: (filter: FilterType) => void
+    addTask: () => void
 }
 
-export function Todolist ( {title, tasks, removeTask, changeFilter}: TodolistPropsType) {
+export function Todolist ( {title, tasks, removeTask, changeFilter, addTask}: TodolistPropsType) {
 
     return (
         <div className="todolist">
                 <h3>{title}</h3>
             <div>
                 <input/>
-                <Button title={'+'}/>
+                <Button title={'+'}
+                        OnClickHandler={addTask}/>
             </div>
             {tasks.length === 0 ? (
                 <p>no tasks</p>

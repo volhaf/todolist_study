@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 import './App.css';
 import {Todolist} from "./Todolist";
+import {v1} from "uuid";
 
 
 //type
 
 export type TaskType ={
-    id: number,
+    id: string,
     title: string,
     isDone: boolean,
 }
@@ -21,22 +22,20 @@ function App() {
     //state
 const [tasks, setTasks] = useState<TaskType[]>(
     [
-        {id: 1, title: 'cheese', isDone: true},
-        {id: 2, title: 'milk', isDone: true},
-        {id: 3, title: 'bread', isDone: false},
+        {id: v1(), title: 'cheese', isDone: true},
+        {id: v1(), title: 'milk', isDone: true},
+        {id: v1(), title: 'bread', isDone: false},
     ]
 );
 
 const [filter, setFilter] = useState<FilterType>('all');
 
 
-
-
 // **********
     //function
-    function removeTask (taskId: number) {
-        const newTasks = tasks.filter (t => t.id !== taskId)
-       setTasks (newTasks);
+    function removeTask (taskId: string) {
+        const task = tasks.filter (t => t.id !== taskId)
+       setTasks (task);
     }
 
     function changeFilter (filter: FilterType) {
@@ -52,6 +51,15 @@ let taskFilter = tasks;
           taskFilter = tasks.filter(t => t.isDone === true)
     }
 
+    function addTask () {
+       const newTask = {
+           id: v1(),
+           title: 'new',
+           isDone: false,
+       }
+        const newList = [...tasks, newTask]
+        setTasks(newList)
+    }
 
     // **********
 
@@ -62,6 +70,7 @@ let taskFilter = tasks;
             tasks={taskFilter}
             removeTask={removeTask}
             changeFilter={changeFilter}
+            addTask={addTask}
         />
     </div>
   );
