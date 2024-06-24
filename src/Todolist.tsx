@@ -35,9 +35,9 @@ export function Todolist ( {title, tasks, removeTask}: TodolistPropsType) {
                     </ul>)
             }
             <div>
-                <Button title= {"All"}/>
-                <Button title= {"Active"}/>
-                <Button title= {"Completed"}/>
+                <Button title= {"All"} OnClickHandler={()=>{}}/>
+                <Button title= {"Active"} OnClickHandler={()=>{}}/>
+                <Button title= {"Completed"} OnClickHandler={()=>{}}/>
             </div>
 
         </div>
