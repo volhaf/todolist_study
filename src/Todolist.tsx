@@ -19,9 +19,14 @@ const [taskInput, setTaskInput] = useState('')
             <div>
                 <input value={taskInput}
                        onChange={event=>setTaskInput(event.currentTarget.value)}
+
                 />
                 <Button title={'+'}
-                        OnClickHandler={()=>{addTask(taskInput)}}
+                        OnClickHandler={()=>{
+                            addTask(taskInput)
+                            setTaskInput('')
+                        }}
+
                 />
             </div>
 
