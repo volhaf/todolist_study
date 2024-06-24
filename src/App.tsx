@@ -11,7 +11,7 @@ export type TaskType ={
     isDone: boolean,
 }
 
-type FilterType = 'all' | 'active' | 'completed'
+export type FilterType = 'all' | 'active' | 'completed'
 
 
  // **********
@@ -27,17 +27,20 @@ const [tasks, setTasks] = useState<TaskType[]>(
     ]
 );
 
-const [filter, setFilter] = useState<FilterType>('active');
+const [filter, setFilter] = useState<FilterType>('all');
 
 
 
 
 // **********
     //function
-
-   function removeTask (taskId: number) {
+    function removeTask (taskId: number) {
         const newTasks = tasks.filter (t => t.id !== taskId)
        setTasks (newTasks);
+    }
+
+    function changeFilter (filter: FilterType) {
+        setFilter(filter);
     }
 
 let taskFilter = tasks;
@@ -48,7 +51,8 @@ let taskFilter = tasks;
     if (filter === 'completed') {
           taskFilter = tasks.filter(t => t.isDone === true)
     }
-    console.log(taskFilter);
+
+
     // **********
 
   return (
@@ -57,6 +61,7 @@ let taskFilter = tasks;
             title ="shopping list"
             tasks={taskFilter}
             removeTask={removeTask}
+            changeFilter={changeFilter}
         />
     </div>
   );
