@@ -11,7 +11,19 @@ type TodolistPropsType = {
 }
 
 export function Todolist ( {title, tasks, removeTask, changeFilter, addTask}: TodolistPropsType) {
-const [taskInput, setTaskInput] = useState('')
+
+    const [taskInput, setTaskInput] = useState('')
+
+//function
+    const addTaskHandler = () => {
+        addTask(taskInput)
+        setTaskInput('')
+    }
+
+
+    // **********
+
+
 
     return (
         <div className="todolist">
@@ -22,10 +34,7 @@ const [taskInput, setTaskInput] = useState('')
 
                 />
                 <Button title={'+'}
-                        OnClickHandler={()=>{
-                            addTask(taskInput)
-                            setTaskInput('')
-                        }}
+                        OnClickHandler={addTaskHandler}
 
                 />
             </div>
