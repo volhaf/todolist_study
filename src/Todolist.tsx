@@ -30,8 +30,14 @@ export function Todolist ( {title, tasks, removeTask, changeFilter, addTask}: To
                 <h3>{title}</h3>
             <div>
                 <input value={taskInput}
-                       onChange={event=>setTaskInput(event.currentTarget.value)}
-
+                       onChange={event => {
+                           setTaskInput(event.currentTarget.value)
+                       }}
+                       onKeyUp={event=> {
+                           if (event.key === 'Enter') {
+                               addTaskHandler()
+                           }
+                       }}
                 />
                 <Button title={'+'}
                         OnClickHandler={addTaskHandler}
