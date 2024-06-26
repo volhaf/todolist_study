@@ -8,7 +8,7 @@ type TodolistPropsType = {
     removeTask: (taskId: string) => void
     changeFilter: (filter: FilterType) => void
     addTask: (title: string) => void
-    changeTaskStatus: (taskId: string) => void
+    changeTaskStatus: (taskId: string, IsDone: boolean) => void
 }
 
 export function Todolist ( {title, tasks, removeTask, changeFilter, addTask, changeTaskStatus }: TodolistPropsType ) {
@@ -59,7 +59,7 @@ export function Todolist ( {title, tasks, removeTask, changeFilter, addTask, cha
                                     <input
                                         type='checkbox'
                                         checked={t.isDone}
-                                        onChange={()=>changeTaskStatus(t.id)}
+                                        onChange={(event)=>changeTaskStatus(t.id, event.currentTarget.checked)}
                                     />
                                     <span>{t.title}</span>
                                     <Button

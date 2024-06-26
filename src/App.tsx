@@ -34,22 +34,25 @@ const [filter, setFilter] = useState<FilterType>('all');
 // **********
     //function
     function removeTask (taskId: string) {
-        const task = tasks.filter (t => t.id !== taskId)
-       setTasks (task);
+        const nextState: Array<TaskType> = tasks.filter (t => t.id !== taskId) // new array
+       setTasks (nextState);
     }
 
     function changeFilter (filter: FilterType) {
         setFilter(filter);
     }
 
-    const changeTaskStatus = (taskId: string) => {
-        const task: TaskType | undefined = tasks.find( t => t.id === taskId)
-        if (task) {
-            task.isDone = !task.isDone;
-            setTasks([...tasks])
-
-        }
+    const changeTaskStatus = (taskId: string, newIsDoneValue: boolean) => {
+        const nextState: Array<TaskType> = tasks.map(t => t.id === taskId ? {...t, isDone: newIsDoneValue} : t)
+        setTasks(nextState)
     }
+
+
+        // const task: TaskType | undefined = tasks.find( t => t.id === taskId)
+        // if (task) {
+        //     task.isDone = !task.isDone;
+        //     setTasks([...tasks])
+
 
 let taskFilter = tasks;
 
