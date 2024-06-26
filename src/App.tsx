@@ -42,6 +42,15 @@ const [filter, setFilter] = useState<FilterType>('all');
         setFilter(filter);
     }
 
+    const changeTaskStatus = (taskId: string) => {
+        const task: TaskType | undefined = tasks.find( t => t.id === taskId)
+        if (task) {
+            task.isDone = !task.isDone;
+            setTasks([...tasks])
+
+        }
+    }
+
 let taskFilter = tasks;
 
    if (filter === 'active') {
@@ -71,6 +80,8 @@ let taskFilter = tasks;
             removeTask={removeTask}
             changeFilter={changeFilter}
             addTask={addTask}
+            changeTaskStatus={changeTaskStatus}
+
         />
     </div>
   );
