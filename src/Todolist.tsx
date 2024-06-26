@@ -33,10 +33,6 @@ export function Todolist ( {title, tasks, removeTask, changeFilter, addTask, cha
         changeFilter(filter)
     }
 
-    // const addCheckedHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    //     const newStatusValue = event.currentTarget.checked;
-    //     changeTaskStatus (task.id, newStatusValue)
-    // }
 
 
     return (
