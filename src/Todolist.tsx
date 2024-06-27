@@ -61,10 +61,10 @@ export function Todolist ( {title, tasks, removeTask, changeFilter, addTask, cha
                                         checked={t.isDone}
                                         onChange={(event)=>changeTaskStatus(t.id, event.currentTarget.checked)}
                                     />
-                                    <span>{t.title}</span>
+                                    <span className={t.isDone ? "task-done" : "task" }>{t.title}</span>
                                     <Button
                                         title={'x'}
-                                        OnClickHandler={()=> removeTask(t.id)}
+                                        OnClickHandler={() => removeTask(t.id)}
                                     />
                                 </li>)
                         })}
