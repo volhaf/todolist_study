@@ -42,6 +42,7 @@ export function Todolist ( {title, tasks, removeTask, changeFilter, addTask, cha
     }
 
     const userTaskEmptyError = taskInputError && <div style={{color: 'red'}}>{taskInputError}</div>
+    const userTasklengthWarning = taskInput.length > 10 && <div>recomendate task title 10 ch</div>
 
 
 
@@ -60,6 +61,7 @@ export function Todolist ( {title, tasks, removeTask, changeFilter, addTask, cha
                         OnClickHandler={addTaskHandler}
                 />
                 {userTaskEmptyError}
+                {userTasklengthWarning}
             </div>
 
             {tasks.length === 0 ? (
