@@ -78,6 +78,7 @@ let taskFilter = tasks;
   return (
     <div className="App">
         <Todolist
+            filter={filter}
             title ="shopping list"
             tasks={taskFilter}
             removeTask={removeTask}

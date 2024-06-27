@@ -24,10 +24,21 @@ ul {
 }
 
 .task-done {
-  text-decoration: line-through;
   opacity: 0.5;
 }
 
 .task {
+font-weight: bold;
+}
 
+.active {
+  background-color: rgb(131, 160, 247);
+  color: white;
+  border-radius: 5px;
+  border-color: rgb(131, 160, 247);;
+}
+
+.error {
+  border: 1px solid red;
+  outline: none;
 }

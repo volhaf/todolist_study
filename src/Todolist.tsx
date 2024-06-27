@@ -5,33 +5,45 @@ import {Button} from "./Button";
 type TodolistPropsType = {
     title: string;
     tasks: TaskType[]
+    filter: FilterType
     removeTask: (taskId: string) => void
     changeFilter: (filter: FilterType) => void
     addTask: (title: string) => void
     changeTaskStatus: (taskId: string, IsDone: boolean) => void
 }
 
-export function Todolist ( {title, tasks, removeTask, changeFilter, addTask, changeTaskStatus }: TodolistPropsType ) {
+export function Todolist ( {title, tasks, removeTask, changeFilter, addTask, changeTaskStatus, filter }: TodolistPropsType ) {
 
     const [taskInput, setTaskInput] = useState('')
+    const[taskInputError, setTaskInputError] = useState<string | null >(null)
 
 //function
     const addTaskHandler = () => {
-        addTask(taskInput)
+        const trimmedTitle = taskInput.trim()
+        if (trimmedTitle) {
+            addTask(taskInput)
+        } else {
+            setTaskInputError('Title is required')
+        }
+
         setTaskInput('')
     }
 
     const changeEventHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        taskInputError && setTaskInputError(null) // можно не проверять ошибку, потому что уже пришел null
         setTaskInput(event.currentTarget.value)
     }
     const addTaskOnKeyUpHandler = (event: KeyboardEvent<HTMLInputElement>) => {
             if (event.key === 'Enter') {
             addTaskHandler()}
     }
-
     const changeFilterHandler = (filter: FilterType) => {
         changeFilter(filter)
     }
+
+    const userTaskEmptyError = taskInputError && <div style={{color: 'red'}}>{taskInputError}</div>
+
+
 
 
 
@@ -42,18 +54,19 @@ export function Todolist ( {title, tasks, removeTask, changeFilter, addTask, cha
                 <input value={taskInput}
                        onChange={changeEventHandler}
                        onKeyUp={addTaskOnKeyUpHandler}
+                       className={taskInputError ? 'error' : ''}
                 />
                 <Button title={'+'}
                         OnClickHandler={addTaskHandler}
-
                 />
+                {userTaskEmptyError}
             </div>
 
             {tasks.length === 0 ? (
                 <p>no tasks</p>
                 ):(
                     <ul>
-                        {tasks.map(t => {
+                        {tasks.map((t: TaskType) => {
                             return (
                                 <li key={t.id}>
                                     <input
@@ -71,9 +84,23 @@ export function Todolist ( {title, tasks, removeTask, changeFilter, addTask, cha
                     </ul>)
             }
             <div>
-                <Button title= {"All"} OnClickHandler={()=>{changeFilterHandler('all')}}/>
-                <Button title= {"Active"} OnClickHandler={()=>{changeFilterHandler('active')}}/>
-                <Button title= {"Completed"} OnClickHandler={()=>{changeFilterHandler('completed')}}/>
+                <Button
+                    title= {"All"}
+                    OnClickHandler={()=>{changeFilterHandler('all')}}
+                    buttonColor = {filter === "all" ? "active" : ""}
+
+                />
+                <Button
+                    title= {"Active"}
+                    OnClickHandler={()=>{changeFilterHandler('active')}}
+                    buttonColor = {filter === "active" ? "active" : ""}
+                />
+                <Button
+                    title= {"Completed"}
+                    OnClickHandler={()=>{changeFilterHandler('completed')}}
+                    buttonColor = {filter === "completed" ? "active" : ""}
+
+                />
             </div>
 
         </div>
