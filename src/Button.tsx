@@ -7,10 +7,11 @@ type ButtonProps = {
     buttonColor?: string
 
 }
-export function Button ({title, OnClickHandler, disabled, buttonColor}: ButtonProps) {
+
+export function Button({title, OnClickHandler, disabled, buttonColor}: ButtonProps) {
     return <button className={buttonColor}
-        onClick={OnClickHandler}
-        disabled={disabled}
+                   onClick={OnClickHandler}
+                   disabled={disabled}
     >
         {title}
     </button>
