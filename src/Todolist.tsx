@@ -51,8 +51,11 @@ export function Todolist({
         changeFilter(filter)
     }
 
-    const userTaskEmptyError = taskInputError && <div style={{color: 'red'}}>{taskInputError}</div>
-    const userTasklengthWarning = taskInput.length > 10 && <div>recomendate task title 10 ch</div>
+    // const userTaskEmptyError = taskInputError && <div style={{color: 'red'}}>{taskInputError}</div>
+    // const userTasklengthWarning = taskInput.length > 15 && <div>recomendate task title 15ch</div>
+
+
+
 
 
     return (
@@ -65,12 +68,23 @@ export function Todolist({
                        className={taskInputError ? 'error' : ''}
                 />
                 <Button title={'+'}
-                        OnClickHandler={addTaskHandler}
-                        disabled={!Boolean(taskInput)}
+                        OnClickHandler={() => {
+                            addTask(taskInput)
+                            setTaskInput("")
+                        }}
+                            disabled={!taskInput.trim()}
                 />
-                {userTaskEmptyError}
-                {userTasklengthWarning}
+                {taskInput.length > 10 && <div> recomendate task title 10ch</div>}
+
+                {/*{userTaskEmptyError}*/}
+                {/*{userTasklengthWarning}*/}
             </div>
+
+
+
+
+
+
 
             {tasks.length === 0 ? (
                 <p>no tasks</p>
@@ -93,6 +107,11 @@ export function Todolist({
                     })}
                 </ul>)
             }
+
+
+
+
+
             <div>
                 <Button
                     title={"All"}
