@@ -23,6 +23,26 @@ export function Todolist({
                              filter
                          }: TodolistPropsType) {
 
+    const tasksElements: Array<JSX.Element> | JSX.Element = tasks.length !== 0
+        ? tasks.map((t: TaskType) => {
+            return (
+                <li key={t.id}>
+                    <input
+                        type='checkbox'
+                        checked={t.isDone}
+                        onChange={(event) => changeTaskStatus(t.id, event.currentTarget.checked)}
+                    />
+                    <span className={t.isDone ? "task-done" : "task"}>{t.title}</span>
+                    <Button
+                        title={'x'}
+                        OnClickHandler={() => removeTask(t.id)}
+                    />
+                </li>
+            )
+        }) : <p>no tasks</p>
+
+
+
     const [taskInput, setTaskInput] = useState('')
     const [taskInputError, setTaskInputError] = useState<string | null>(null)
 
@@ -71,31 +91,12 @@ export function Todolist({
                 {userTaskEmptyError}
                 {userTasklengthWarning}
             </div>
+            <ul>{tasksElements}</ul>
 
-            {tasks.length === 0 ? (
-                <p>no tasks</p>
-            ) : (
-                <ul>
-                    {tasks.map((t: TaskType) => {
-                        return (
-                            <li key={t.id}>
-                                <input
-                                    type='checkbox'
-                                    checked={t.isDone}
-                                    onChange={(event) => changeTaskStatus(t.id, event.currentTarget.checked)}
-                                />
-                                <span className={t.isDone ? "task-done" : "task"}>{t.title}</span>
-                                <Button
-                                    title={'x'}
-                                    OnClickHandler={() => removeTask(t.id)}
-                                />
-                            </li>)
-                    })}
-                </ul>)
-            }
+
+
             <div>
-                <Button
-                    title={"All"}
+                <Button title={"All"}
                     OnClickHandler={() => {
                         changeFilterHandler('all')
                     }}
