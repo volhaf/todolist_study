@@ -23,6 +23,8 @@ export function Todolist({
                              filter
                          }: TodolistPropsType) {
 
+
+
     const tasksElements: Array<JSX.Element> | JSX.Element = tasks.length !== 0
         ? tasks.map((t: TaskType) => {
             return (
@@ -53,10 +55,9 @@ export function Todolist({
             addTask(taskInput)
         } else {
             setTaskInputError('Title is required')
-        }
+            setTaskInput('')
+        }}
 
-        setTaskInput('')
-    }
 
     const changeEventHandler = (event: ChangeEvent<HTMLInputElement>) => {
         taskInputError && setTaskInputError(null) // можно не проверять ошибку, потому что уже пришел null
