@@ -10,7 +10,6 @@ type TodolistPropsType = {
     changeFilter: (filter: FilterType) => void
     addTask: (title: string) => void
     changeTaskStatus: (taskId: string, IsDone: boolean) => void
-
 }
 
 export function Todolist({
@@ -23,10 +22,9 @@ export function Todolist({
                              filter
                          }: TodolistPropsType) {
 
-
-
     const tasksElements: Array<JSX.Element> | JSX.Element = tasks.length !== 0
         ? tasks.map((t: TaskType) => {
+            const removeTaskHandler = () => removeTask(t.id)
             return (
                 <li key={t.id}>
                     <input
@@ -37,13 +35,11 @@ export function Todolist({
                     <span className={t.isDone ? "task-done" : "task"}>{t.title}</span>
                     <Button
                         title={'x'}
-                        OnClickHandler={() => removeTask(t.id)}
+                        OnClickHandler={removeTaskHandler}
                     />
                 </li>
             )
         }) : <p>no tasks</p>
-
-
 
     const [taskInput, setTaskInput] = useState('')
     const [taskInputError, setTaskInputError] = useState<string | null>(null)
@@ -58,24 +54,26 @@ export function Todolist({
             setTaskInputError('Title is required')
             setTaskInput('')
         }}
-
-
-
     const changeEventHandler = (event: ChangeEvent<HTMLInputElement>) => {
         taskInputError && setTaskInputError(null) // можно не проверять ошибку, потому что уже пришел null
         setTaskInput(event.currentTarget.value)
     }
-
-
     const keyDownAddTaskHandler = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
             addTaskHandler()
         }
     }
-    const changeFilterHandler = (filter: FilterType) => {
-        changeFilter(filter)
+    const setAllTaskHandler = () => {
+        changeFilter('all')
+    }
+    const setActiveTaskHandler = () => {
+        changeFilter('active')
+    }
+    const setCompletedTaskHandler = () => {
+        changeFilter('completed')
     }
 
+    const isTaskButtonDisabled = !Boolean(taskInput.trim()) || taskInput.length > 15;
     const userTaskEmptyError = taskInputError && <div style={{color: 'red'}}>{taskInputError}</div>
     const userTasklengthWarning = taskInput.length > 15 && <div>recomendate task title 15 ch</div>
 
@@ -87,12 +85,10 @@ export function Todolist({
                 <input value={taskInput}
                        onChange={changeEventHandler}
                        onKeyDown={keyDownAddTaskHandler}
-                       className={taskInputError ? 'error' : ''}
-                />
+                       className={taskInputError ? 'error' : ''}/>
                 <Button title={'+'}
                         OnClickHandler={addTaskHandler}
-                        disabled={!Boolean(taskInput.trim())}
-                />
+                        disabled={isTaskButtonDisabled}/>
                 {userTasklengthWarning}
                 {userTaskEmptyError}
 
@@ -103,27 +99,16 @@ export function Todolist({
 
             <div>
                 <Button title={"All"}
-                    OnClickHandler={() => {
-                        changeFilterHandler('all')
-                    }}
-                    buttonColor={filter === "all" ? "active" : ""}
-
-                />
+                    OnClickHandler={setAllTaskHandler}
+                    buttonColor={filter === "all" ? "active" : ""}/>
                 <Button
                     title={"Active"}
-                    OnClickHandler={() => {
-                        changeFilterHandler('active')
-                    }}
-                    buttonColor={filter === "active" ? "active" : ""}
-                />
+                    OnClickHandler={setActiveTaskHandler}
+                    buttonColor={filter === "active" ? "active" : ""}/>
                 <Button
                     title={"Completed"}
-                    OnClickHandler={() => {
-                        changeFilterHandler('completed')
-                    }}
-                    buttonColor={filter === "completed" ? "active" : ""}
-
-                />
+                    OnClickHandler={setCompletedTaskHandler}
+                    buttonColor={filter === "completed" ? "active" : ""}/>
             </div>
 
         </div>
