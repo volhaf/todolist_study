@@ -37,9 +37,11 @@ const [filter, setFilter] = useState<FilterType>('all');
     function changeFilter (filter: FilterType) {
         setFilter(filter);
     }
+
     function changeTaskStatus (taskId: string, newIsDoneValue: boolean) {
         const nextState: Array<TaskType> = tasks.map(t => t.id === taskId ? {...t, isDone: newIsDoneValue} : t)
         setTasks(nextState)
+
     }
 
 

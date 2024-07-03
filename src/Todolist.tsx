@@ -40,20 +40,18 @@ export function Todolist({
                 </li>
             )
         }) : <p>no tasks</p>
-
     const [taskInput, setTaskInput] = useState('')
     const [taskInputError, setTaskInputError] = useState<string | null>(null)
-
 //function
-
     const addTaskHandler = () => {
         const trimmedTitle = taskInput.trim()
         if (trimmedTitle) {
             addTask(taskInput)
         } else {
             setTaskInputError('Title is required')
-            setTaskInput('')
-        }}
+        }
+        setTaskInput('')
+    }
     const changeEventHandler = (event: ChangeEvent<HTMLInputElement>) => {
         taskInputError && setTaskInputError(null) // можно не проверять ошибку, потому что уже пришел null
         setTaskInput(event.currentTarget.value)
@@ -73,9 +71,9 @@ export function Todolist({
         changeFilter('completed')
     }
 
-    const isTaskButtonDisabled = !Boolean(taskInput.trim()) || taskInput.length > 15;
-    const userTaskEmptyError = taskInputError && <div style={{color: 'red'}}>{taskInputError}</div>
+    const isTaskButtonDisabled = !Boolean(taskInput.trim()) || taskInput.length > 20;
     const userTasklengthWarning = taskInput.length > 15 && <div>recomendate task title 15 ch</div>
+    const userTaskEmptyError = taskInputError && <div style={{color: 'red'}}>{taskInputError}</div>
 
 
     return (
@@ -85,7 +83,7 @@ export function Todolist({
                 <input value={taskInput}
                        onChange={changeEventHandler}
                        onKeyDown={keyDownAddTaskHandler}
-                       className={taskInputError ? 'error' : ''}/>
+                       className={taskInputError ? 'taskInputError' : ''}/>
                 <Button title={'+'}
                         OnClickHandler={addTaskHandler}
                         disabled={isTaskButtonDisabled}/>
@@ -94,8 +92,6 @@ export function Todolist({
 
             </div>
             <ul>{tasksElements}</ul>
-
-
 
             <div>
                 <Button title={"All"}
