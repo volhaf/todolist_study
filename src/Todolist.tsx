@@ -87,7 +87,7 @@ export function Todolist({
                 />
                 <Button title={'+'}
                         OnClickHandler={addTaskHandler}
-                        disabled={!Boolean(taskInput)}
+                        disabled={!Boolean(taskInput.trim())}
                 />
                 {userTaskEmptyError}
                 {userTasklengthWarning}

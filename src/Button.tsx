@@ -11,9 +11,6 @@ type ButtonProps = {
 export function Button({title, OnClickHandler, disabled, buttonColor}: ButtonProps) {
     return <button className={buttonColor}
                    onClick={OnClickHandler}
-                   disabled={disabled}
-    >
-        {title}
-    </button>
-
+                   disabled={disabled}>
+        {title} </button>
 }
