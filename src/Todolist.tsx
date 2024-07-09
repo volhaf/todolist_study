@@ -80,7 +80,8 @@ export function Todolist({
         <div className="todolist">
             <h3>{title}</h3>
             <div>
-                <input value={taskInput}
+                <input
+                    value={taskInput}
                        onChange={changeEventHandler}
                        onKeyDown={keyDownAddTaskHandler}
                        className={taskInputError ? 'taskInputError' : ''}/>

@@ -44,7 +44,6 @@ const [filter, setFilter] = useState<FilterType>('all');
 
     }
 
-
 let taskFilter = tasks;
    if (filter === 'active') {
         taskFilter = tasks.filter(t => t.isDone === false)
