@@ -11,15 +11,47 @@ export type TaskType = {
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 
+export type TodoListType = {
+	id: string
+	title:string
+	filter: FilterValuesType
+	tasks: TaskType[]
+}
+
 function App() {
 
-	const [tasks, setTasks] = useState<TaskType[]>([
-		{id: v1(), title: 'HTML&CSS', isDone: true},
-		{id: v1(), title: 'JS', isDone: true},
-		{id: v1(), title: 'ReactJS', isDone: false},
+	const [todolists, setTodolists] = useState<Array<TodoListType>>([
+		{
+			id: v1(),
+			title: "what to lern",
+			filter: "all",
+			tasks: [
+				{id: v1(), title: 'HTML&CSS', isDone: true},
+				{id: v1(), title: 'JS', isDone: true},
+				{id: v1(), title: 'ReactJS', isDone: false},
+			]
+		},
+		{
+			id: v1(),
+			title: "what to bye",
+			filter: "all",
+			tasks: [
+				{id: v1(), title: 'water', isDone: true},
+				{id: v1(), title: 'icecream', isDone: true},
+				{id: v1(), title: 'milk', isDone: false},
+			]
+		},
+
 	])
 
-	const [filter, setFilter] = useState<FilterValuesType>('all')
+
+	// const [tasks, setTasks] = useState<TaskType[]>([
+	// 	{id: v1(), title: 'HTML&CSS', isDone: true},
+	// 	{id: v1(), title: 'JS', isDone: true},
+	// 	{id: v1(), title: 'ReactJS', isDone: false},
+	// ])
+	//
+	// const [filter, setFilter] = useState<FilterValuesType>('all')
 
 	const removeTask = (taskId: string) => {
 		const filteredTasks = tasks.filter((task) => {
