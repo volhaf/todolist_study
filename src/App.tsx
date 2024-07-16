@@ -74,10 +74,18 @@ function App() {
 
 
 	const todoListComponents: Array<JSX.Element> = todolists.map(tl => {
+
+		let tasksForTodolist = tasks[tl.id]
+		if (tl.filter === 'active') {
+			tasksForTodolist = tasksForTodolist.filter(task => !task.isDone)}
+		if (tl.filter === 'completed') {
+			tasksForTodolist = tasksForTodolist.filter(task => task.isDone)}
+
+
 		return (
 			<Todolist
 				title={tl.title}
-				tasks={tasks[tl.id]}
+				tasks={tasksForTodolist}
 				removeTodoList={removeTodoList}
 				todolistId={tl.id}
 				key={tl.id}
@@ -85,27 +93,16 @@ function App() {
 				changeFilter={changeFilter}
 				addTask={addTask}
 				changeTaskStatus={changeTaskStatus}
-				filter={tl.filter}
-			/>
+				filter={tl.filter}/>
 		)
 	})
-
-	let tasksForTodolist = tasks
-	if (filter === 'active') {
-		tasksForTodolist = tasks.filter(task => !task.isDone)
-	}
-
-	if (filter === 'completed') {
-		tasksForTodolist = tasks.filter(task => task.isDone)
-	}
-
 
 
 	return (
 		<div className="App">
-			<todoListComponents/>
+			{todoListComponents}
 		</div>
-	);
+	)
 }
 
 export default App;
