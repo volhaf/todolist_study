@@ -61,14 +61,28 @@ function App() {
 			[todolistId] : tasks[todolistId].map(t => t.id === taskId ? {...t, isDone: taskStatus} : t)
 		})
 	}
-
 	const changeFilter = (filter: FilterValuesType, todolistId: string) => {
 		setTodolists(todolists.map(tl => tl.id === todolistId ? {...tl, filter: filter} : tl))
 	}
-
 	const removeTodoList = (todolistId: string) => {
 		setTodolists(todolists.filter(tl => tl.id !== todolistId))
 	}
+
+
+
+	const todoListComponents: Array<JSX.Element> = todolists.map(tl => {
+		return (
+			<Todolist
+				title="What to learn"
+				tasks={tasksForTodolist}
+				removeTask={removeTask}
+				changeFilter={changeFilter}
+				addTask={addTask}
+				changeTaskStatus={changeTaskStatus}
+				filter={filter}
+			/>
+		)
+	})
 
 	let tasksForTodolist = tasks
 	if (filter === 'active') {
@@ -79,17 +93,11 @@ function App() {
 		tasksForTodolist = tasks.filter(task => task.isDone)
 	}
 
+
+
 	return (
 		<div className="App">
-			<Todolist
-				title="What to learn"
-				tasks={tasksForTodolist}
-				removeTask={removeTask}
-				changeFilter={changeFilter}
-				addTask={addTask}
-				changeTaskStatus={changeTaskStatus}
-				filter={filter}
-			/>
+			<todoListComponents/>
 		</div>
 	);
 }
