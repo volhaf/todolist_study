@@ -51,7 +51,6 @@ function App() {
 				[todolistId]: tasks[todolistId].filter(t => t.id !== taskId)
 			})
 	}
-
 	const addTask = (title: string, todolistId: string) => {
 		const newTask = {id: v1(), title: title, isDone: false}
 		setTasks({...tasks,
@@ -63,11 +62,10 @@ function App() {
 		})
 	}
 
+
 	const changeFilter = (filter: FilterValuesType, todolistId: string) => {
-		setFilter(filter)
+		setTodolists(todolists.map(tl => tl.id === todolistId ? {...tl, filter: filter} : tl))
 	}
-
-
 
 	let tasksForTodolist = tasks
 	if (filter === 'active') {
