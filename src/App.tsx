@@ -1,6 +1,6 @@
 import './App.css';
 import {Todolist} from "./Todolist";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {v1} from "uuid";
 
 export type TaskType = {
@@ -15,43 +15,35 @@ export type TodoListType = {
 	id: string
 	title:string
 	filter: FilterValuesType
-	tasks: TaskType[]
+}
+
+type TasksStateType = {
+	[todolistId: string] : TaskType[]
 }
 
 function App() {
 
-	const [todolists, setTodolists] = useState<Array<TodoListType>>([
-		{
-			id: v1(),
-			title: "what to lern",
-			filter: "all",
-			tasks: [
-				{id: v1(), title: 'HTML&CSS', isDone: true},
-				{id: v1(), title: 'JS', isDone: true},
-				{id: v1(), title: 'ReactJS', isDone: false},
-			]
-		},
-		{
-			id: v1(),
-			title: "what to bye",
-			filter: "all",
-			tasks: [
-				{id: v1(), title: 'water', isDone: true},
-				{id: v1(), title: 'icecream', isDone: true},
-				{id: v1(), title: 'milk', isDone: false},
-			]
-		},
+	const todolistId_1 = v1()
+	const todolistId_2 = v1()
 
+	const [todolists, setTodolists] = useState<Array<TodoListType>>([
+		{id: todolistId_1, title: "what to lern", filter: 'all' },
+		{id: todolistId_2, title: "what to bye", filter: 'all'},
 	])
 
+	const [tasks, setTasks] = useState ({
+		[todolistId_1] : [
+			{id: v1(), title: 'HTML&CSS', isDone: true},
+			{id: v1(), title: 'JS', isDone: true},
+			{id: v1(), title: 'ReactJS', isDone: false},
+		],
+		[todolistId_2] : [
+			{id: v1(), title: 'water', isDone: true},
+			{id: v1(), title: 'icecream', isDone: true},
+			{id: v1(), title: 'milk', isDone: false},
+		]
+	})
 
-	// const [tasks, setTasks] = useState<TaskType[]>([
-	// 	{id: v1(), title: 'HTML&CSS', isDone: true},
-	// 	{id: v1(), title: 'JS', isDone: true},
-	// 	{id: v1(), title: 'ReactJS', isDone: false},
-	// ])
-	//
-	// const [filter, setFilter] = useState<FilterValuesType>('all')
 
 	const removeTask = (taskId: string) => {
 		const filteredTasks = tasks.filter((task) => {
