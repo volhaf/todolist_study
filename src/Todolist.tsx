@@ -5,15 +5,17 @@ import {Button} from "./Button";
 type PropsType = {
 	title: string
 	tasks: TaskType[]
-	removeTask: (taskId: string) => void
-	changeFilter: (filter: FilterValuesType) => void
-	addTask: (title: string) => void
-	changeTaskStatus: (taskId: string, taskStatus: boolean) => void
+	removeTask: (taskId: string, todolistId: string) => void
+	changeFilter: (filter: FilterValuesType, todolistId: string) => void
+	addTask: (title: string, todolistId: string) => void
+	changeTaskStatus: (taskId: string, taskStatus: boolean, todolistId: string) => void
+	removeTodoList: (todolistId: string) => void
 	filter: FilterValuesType
+	todolistId: string
 }
 
 export const Todolist = (props: PropsType) => {
-	const {title, tasks, filter, removeTask, changeFilter, addTask, changeTaskStatus} = props
+	const {title, tasks, filter, removeTask, changeFilter, addTask, changeTaskStatus, removeTodoList, todolistId} = props
 
 	const [taskTitle, setTaskTitle] = useState('')
 	const [error, setError] = useState<string | null>(null)

@@ -70,16 +70,22 @@ function App() {
 
 
 
+
+
+
 	const todoListComponents: Array<JSX.Element> = todolists.map(tl => {
 		return (
 			<Todolist
-				title="What to learn"
-				tasks={tasksForTodolist}
+				title={tl.title}
+				tasks={tasks[tl.id]}
+				removeTodoList={removeTodoList}
+				todolistId={tl.id}
+				key={tl.id}
 				removeTask={removeTask}
 				changeFilter={changeFilter}
 				addTask={addTask}
 				changeTaskStatus={changeTaskStatus}
-				filter={filter}
+				filter={tl.filter}
 			/>
 		)
 	})
