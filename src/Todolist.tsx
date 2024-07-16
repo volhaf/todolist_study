@@ -22,7 +22,7 @@ export const Todolist = (props: PropsType) => {
 
 	const addTaskHandler = () => {
 		if (taskTitle.trim() !== '') {
-			addTask(taskTitle.trim())
+			addTask(taskTitle.trim(),todolistId)
 			setTaskTitle('')
 		} else {
 			setError('Title is required')
@@ -41,12 +41,12 @@ export const Todolist = (props: PropsType) => {
 	}
 
 	const changeFilterTasksHandler = (filter: FilterValuesType) => {
-		changeFilter(filter)
+		changeFilter(filter,todolistId)
 	}
 
 	return (
 		<div>
-			<h3>{title}</h3>
+			<h3>{title}<Button title={'X'} onClick={()=>removeTodoList(todolistId)}/></h3>
 			<div>
 				<input
 					className={error ? 'error': ''}
@@ -64,12 +64,12 @@ export const Todolist = (props: PropsType) => {
 						{tasks.map((task) => {
 
 							const removeTaskHandler = () => {
-								removeTask(task.id)
+								removeTask(task.id, todolistId)
 							}
 
 							const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
 								const newStatusValue = e.currentTarget.checked
-								changeTaskStatus(task.id, newStatusValue)
+								changeTaskStatus(task.id, newStatusValue,todolistId)
 							}
 
 							return <li key={task.id} className={task.isDone ? 'is-done' : ''}>
