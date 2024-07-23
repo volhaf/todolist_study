@@ -17,9 +17,9 @@ export const EditableSpan = ({title, changetitleCallback}:EditableSpanPropsType)
 
 
     const onEditMode = ()=> setEditMode (true);
-        const offEditMode = ()=> {
-            setEditMode (false);
-            changetitleCallback(itemTitle)
+    const offEditMode = ()=> {
+        setEditMode (false );
+        changetitleCallback(itemTitle)
         }
 
 
