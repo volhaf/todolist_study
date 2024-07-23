@@ -114,7 +114,10 @@ const addTodolist= (title: string)=> {
 				changeFilter={changeFilter}
 				addTask={addTask}
 				changeTaskStatus={changeTaskStatus}
-				filter={tl.filter}/>
+				filter={tl.filter}
+				changeTaskTitle={changeTaskTitle}
+
+			/>
 		)
 	})
 
