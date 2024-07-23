@@ -24,6 +24,7 @@ type TasksStateType = {
 
 function App() {
 
+	//BLL
 	const todolistId_1 = v1()
 	const todolistId_2 = v1()
 
