@@ -1,7 +1,7 @@
 import './App.css';
 import {Todolist} from "./Todolist";
 import {useContext, useState} from "react";
-import {v1} from "uuid";
+import {v1, v4} from "uuid";
 
 export type TaskType = {
 	id: string
@@ -68,7 +68,18 @@ function App() {
 		setTodolists(todolists.filter(tl => tl.id !== todolistId))
 	}
 
+const addTodolist= (title: string)=> {
+		const todolistId = v1()
+		const newTodo: TodoListType = {
+			id: todolistId,
+			title: title,
+			filter: 'all'
+		}
+		const nextState: Array<TodoListType> =[...todolists, newTodo]
+	setTodolists(nextState)
+	setTasks({...tasks, [todolistId]: []})
 
+}
 
 
 
