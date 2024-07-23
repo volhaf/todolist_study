@@ -16,7 +16,7 @@ export const EditableSpan = ({title, changetitleCallback}:EditableSpanPropsType)
         editMode
             ? <input
             value={title}
-            autoFocus={}
+            autoFocus
             onBlur={offEditMode}
 
             />
