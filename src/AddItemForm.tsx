@@ -7,26 +7,26 @@ type AddItemFormPropsType = {
 }
 
 export const AddItemForm = ({addItem}: AddItemFormPropsType) => {
-    const [taskTitle, setTaskTitle] = useState("");
+    const [itemTitle, setItemTitle] = useState("");
     const [error, setError] = useState<string | null>(null)
 
 
-    const addTaskHandler = () => {
-        if (taskTitle.trim() !== '') {
-            addItem(taskTitle.trim())
-            setTaskTitle('')
+    const addItemHandler = () => {
+        if (itemTitle.trim() !== '') {
+            addItem(itemTitle.trim())
+            setItemTitle('')
         } else {
             setError('Title is required')
         }
     }
 
-    const changeTaskTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        setTaskTitle(event.currentTarget.value)
+    const changeItemTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setItemTitle(event.currentTarget.value)
     }
-    const addTaskOnKeyUpHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+    const addItemOnKeyUpHandler = (event: KeyboardEvent<HTMLInputElement>) => {
         setError(null)
         if (event.key === 'Enter') {
-            addTaskHandler()
+            addItemHandler()
         }
     }
 
@@ -34,11 +34,11 @@ export const AddItemForm = ({addItem}: AddItemFormPropsType) => {
         <div>
             <input
                 className={error ? 'error' : ''}
-                value={taskTitle}
-                onChange={changeTaskTitleHandler}
-                onKeyUp={addTaskOnKeyUpHandler}
+                value={itemTitle}
+                onChange={changeItemTitleHandler}
+                onKeyUp={addItemOnKeyUpHandler}
             />
-            <Button title={'+'} onClick={addTaskHandler}/>
+            <Button title={'+'} onClick={addItemHandler}/>
             {error && <div className={'error-message'}>{error}</div>}
         </div>
     )
