@@ -1,7 +1,7 @@
 import './App.css';
 import {Todolist} from "./Todolist";
 import {useContext, useState} from "react";
-import {v1, v4} from "uuid";
+import {v1} from "uuid";
 import {AddItemForm} from "./AddItemForm";
 
 export type TaskType = {
@@ -62,9 +62,14 @@ function App() {
 			[todolistId] : tasks[todolistId].map(t => t.id === taskId ? {...t, isDone: taskStatus} : t)
 		})
 	}
-	const changeFilter = (filter: FilterValuesType, todolistId: string) => {
-		setTodolists(todolists.map(tl => tl.id === todolistId ? {...tl, filter: filter} : tl))
+
+	const changeTaskTitle = (taskId: string, title: string, todolistId: string) => {
+		setTasks({...tasks,
+			[todolistId] : tasks[todolistId].map(t => t.id === taskId ? {...t, title: title} : t)
+		})
 	}
+	const changeFilter = (filter: FilterValuesType, todolistId: string) => {
+		setTodolists(todolists.map(tl => tl.id === todolistId ? {...tl, filter: filter} : tl))}
 	const removeTodoList = (todolistId: string) => {
 		setTodolists(todolists.filter(tl => tl.id !== todolistId))
 	}
