@@ -2,6 +2,7 @@ import './App.css';
 import {Todolist} from "./Todolist";
 import {useContext, useState} from "react";
 import {v1, v4} from "uuid";
+import {AddItemForm} from "./AddItemForm";
 
 export type TaskType = {
 	id: string
@@ -111,6 +112,7 @@ const addTodolist= (title: string)=> {
 
 	return (
 		<div className="App">
+			<AddItemForm addItem = {addTodolist}/>
 			{todoListComponents}
 		</div>
 	)
