@@ -3,23 +3,22 @@ import {FilterValuesType, TaskType} from "./App";
 import {ChangeEvent, KeyboardEvent, useState} from "react";
 
 type AddItemFormPropsType = {
-    addTask: (newTitle: string) => void
+    addItem: (newTitle: string) => void
 }
 
-export const AddItemForm = ({addTask}: AddItemFormPropsType) => {
+export const AddItemForm = ({addItem}: AddItemFormPropsType) => {
     const [taskTitle, setTaskTitle] = useState("");
     const [error, setError] = useState<string | null>(null)
 
 
     const addTaskHandler = () => {
         if (taskTitle.trim() !== '') {
-            addTask(taskTitle.trim())
+            addItem(taskTitle.trim())
             setTaskTitle('')
         } else {
             setError('Title is required')
         }
     }
-
 
     const changeTaskTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setTaskTitle(event.currentTarget.value)
