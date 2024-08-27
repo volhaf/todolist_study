@@ -2,6 +2,7 @@
 import {FilterValuesType, TaskType} from "./App";
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 type AddItemFormPropsType = {
     addItem: (newTitle: string) => void
@@ -32,23 +33,26 @@ export const AddItemForm = ({addItem}: AddItemFormPropsType) => {
     }
 
     const buttonStyle = {
-        maxWidth: '20px',
-        maxHeight: '20px',
-        minWidth: '20px',
-        minHeight: '20px',
+        maxWidth: '30px',
+        maxHeight: '30px',
+        minWidth: '30px',
+        minHeight: '30px',
 
     }
     return (
         <div>
-            <input
+            <TextField
+                error={!!error}
+                id="outlined-basic"
+                label={error ? error : 'type smth. please)'}
+                variant="outlined"
+                size={'small'}
                 className={error ? 'error' : ''}
                 value={itemTitle}
                 onChange={changeItemTitleHandler}
                 onKeyUp={addItemOnKeyUpHandler}
             />
-            {/*<Button title={'+'} onClick={addItemHandler}/>*/}
             <Button onClick={addItemHandler} variant="contained" style={buttonStyle}  >+</Button>
-            {error && <div className={'error-message'}>{error}</div>}
         </div>
     )
 }
