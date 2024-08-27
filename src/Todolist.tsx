@@ -3,6 +3,9 @@ import {ChangeEvent, KeyboardEvent, useState} from "react";
 import {Button} from "./Button";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 type PropsType = {
 	title: string
@@ -50,7 +53,13 @@ const changeTodoListTitleCallback = (newTitle: string) => {
 		<div>
 			<h3>
 				<EditableSpan changetitleCallback={changeTodoListTitleCallback} title={title}/>
-				<Button title={'X'} onClick={()=>removeTodoList(todolistId)}/></h3>
+				{/*<Button title={'X'} onClick={()=>removeTodoList(todolistId)}/>*/}
+				<IconButton onClick={()=>removeTodoList(todolistId)} aria-label="delete">
+					<DeleteIcon />
+				</IconButton>
+			</h3>
+
+
 			<AddItemForm addItem = {addTaskCallback}/>
 			{
 				tasks.length === 0
@@ -74,7 +83,11 @@ const changeTodoListTitleCallback = (newTitle: string) => {
 							return <li key={task.id} className={task.isDone ? 'is-done' : ''}>
 								<input type="checkbox" checked={task.isDone} onChange={changeTaskStatusHandler}/>
 								<EditableSpan changetitleCallback ={changeTaskTitleCallback} title={task.title}/>
-								<Button onClick={removeTaskHandler} title={'x'}/>
+								{/*<Button onClick={removeTaskHandler} title={'x'}/>*/}
+
+								<IconButton onClick={removeTaskHandler} aria-label="delete">
+									<DeleteIcon/>
+								</IconButton>
 							</li>
 						})}
 					</ul>
@@ -83,6 +96,9 @@ const changeTodoListTitleCallback = (newTitle: string) => {
 				<Button className={filter === 'all' ? 'active-filter' : '' } title={'All'} onClick={()=> changeFilterTasksHandler('all')}/>
 				<Button className={filter === 'active' ? 'active-filter' : '' } title={'Active'} onClick={()=> changeFilterTasksHandler('active')}/>
 				<Button className={filter === 'completed' ? 'active-filter' : '' } title={'Completed'} onClick={()=> changeFilterTasksHandler('completed')}/>
+
+
+
 			</div>
 		</div>
 	)
