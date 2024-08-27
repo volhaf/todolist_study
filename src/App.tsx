@@ -3,6 +3,7 @@ import {Todolist} from "./Todolist";
 import {useContext, useState} from "react";
 import {v1} from "uuid";
 import {AddItemForm} from "./AddItemForm";
+import ButtonAppBar from "./ButtonAppBar";
 
 export type TaskType = {
 	id: string
@@ -92,8 +93,6 @@ const addTodolist= (title: string)=> {
 }
 
 
-
-
 	const todoListComponents: Array<JSX.Element> = todolists.map(tl => {
 
 		let tasksForTodolist = tasks[tl.id]
@@ -102,8 +101,8 @@ const addTodolist= (title: string)=> {
 		if (tl.filter === 'completed') {
 			tasksForTodolist = tasksForTodolist.filter(task => task.isDone)}
 
-
 		return (
+
 			<Todolist
 				title={tl.title}
 				tasks={tasksForTodolist}
@@ -117,7 +116,6 @@ const addTodolist= (title: string)=> {
 				filter={tl.filter}
 				changeTaskTitle={changeTaskTitle}
 				changeTodoListTitle={changeTodoListTitle}
-
 			/>
 		)
 	})
@@ -125,8 +123,11 @@ const addTodolist= (title: string)=> {
 
 	return (
 		<div className="App">
+			<ButtonAppBar/>
 			<AddItemForm addItem = {addTodolist}/>
 			{todoListComponents}
+
+
 		</div>
 	)
 }
