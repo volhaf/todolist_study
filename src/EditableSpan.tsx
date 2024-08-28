@@ -2,10 +2,10 @@ import {ChangeEvent, useState} from "react";
 
 type EditableSpanPropsType = {
     title: string
-    changetitleCallback: (newTitle: string) => void
+    changeTitleCallback: (newTitle: string) => void
 }
 
-export const EditableSpan = ({title, changetitleCallback}:EditableSpanPropsType) => {
+export const EditableSpan = ({title, changeTitleCallback}:EditableSpanPropsType) => {
 
     const [editMode, setEditMode] = useState(false);
     const [itemTitle, setItemTitle] = useState(title);
@@ -19,7 +19,7 @@ export const EditableSpan = ({title, changetitleCallback}:EditableSpanPropsType)
     const onEditMode = ()=> setEditMode (true);
     const offEditMode = ()=> {
         setEditMode (false );
-        changetitleCallback(itemTitle)
+        changeTitleCallback(itemTitle)
         }
 
 
