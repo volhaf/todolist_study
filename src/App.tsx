@@ -4,6 +4,9 @@ import {useContext, useState} from "react";
 import {v1} from "uuid";
 import {AddItemForm} from "./AddItemForm";
 import ButtonAppBar from "./ButtonAppBar";
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 
 export type TaskType = {
 	id: string
@@ -102,34 +105,43 @@ const addTodolist= (title: string)=> {
 			tasksForTodolist = tasksForTodolist.filter(task => task.isDone)}
 
 		return (
-
-			<Todolist
-				title={tl.title}
-				tasks={tasksForTodolist}
-				removeTodoList={removeTodoList}
-				todolistId={tl.id}
-				key={tl.id}
-				removeTask={removeTask}
-				changeFilter={changeFilter}
-				addTask={addTask}
-				changeTaskStatus={changeTaskStatus}
-				filter={tl.filter}
-				changeTaskTitle={changeTaskTitle}
-				changeTodoListTitle={changeTodoListTitle}
-			/>
+			<Grid item sx={{p: '30px'}}>
+				<Paper elevation={5} sx={{p: '30px'}}>
+					<Todolist
+						title={tl.title}
+						tasks={tasksForTodolist}
+						removeTodoList={removeTodoList}
+						todolistId={tl.id}
+						key={tl.id}
+						removeTask={removeTask}
+						changeFilter={changeFilter}
+						addTask={addTask}
+						changeTaskStatus={changeTaskStatus}
+						filter={tl.filter}
+						changeTaskTitle={changeTaskTitle}
+						changeTodoListTitle={changeTodoListTitle}
+					/>
+				</Paper>
+			</Grid>
 		)
 	})
 
 
 	return (
 		<div className="App">
-			<ButtonAppBar/>
-			<AddItemForm addItem = {addTodolist}/>
-			{todoListComponents}
-
+			<Container fixed>
+				<ButtonAppBar/>
+				<Grid container sx={{ml: '60px'}}>
+					<AddItemForm addItem = {addTodolist}/>
+				</Grid>
+				<Grid container>
+					{todoListComponents}
+				</Grid>
+</Container>
 
 		</div>
 	)
 }
+
 
 export default App;

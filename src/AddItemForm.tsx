@@ -33,10 +33,10 @@ export const AddItemForm = ({addItem}: AddItemFormPropsType) => {
     }
 
     const buttonStyle = {
-        maxWidth: '30px',
-        maxHeight: '30px',
-        minWidth: '30px',
-        minHeight: '30px',
+        maxWidth: '38px',
+        maxHeight: '38px',
+        minWidth: '38px',
+        minHeight: '38px',
 
     }
     return (
@@ -52,7 +52,7 @@ export const AddItemForm = ({addItem}: AddItemFormPropsType) => {
                 onChange={changeItemTitleHandler}
                 onKeyUp={addItemOnKeyUpHandler}
             />
-            <Button onClick={addItemHandler} variant="contained" style={buttonStyle}  >+</Button>
+            <Button onClick={addItemHandler} variant="contained" style={buttonStyle} >+</Button>
         </div>
     )
 }

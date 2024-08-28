@@ -1,12 +1,16 @@
 import {FilterValuesType, TaskType} from "./App";
-import {ChangeEvent, KeyboardEvent, useState} from "react";
-// import {Button} from "./Button";
+import * as React from "react";
+import {ChangeEvent} from "react";
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Checkbox from '@mui/material/Checkbox';
+import Button from '@mui/material/Button';
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+
 
 
 
@@ -56,7 +60,6 @@ const changeTodoListTitleCallback = (newTitle: string) => {
 		<div>
 			<h3>
 				<EditableSpan changetitleCallback={changeTodoListTitleCallback} title={title}/>
-				{/*<Button title={'X'} onClick={()=>removeTodoList(todolistId)}/>*/}
 				<IconButton onClick={()=>removeTodoList(todolistId)} aria-label="delete">
 					<DeleteIcon fontSize="small"/>
 				</IconButton>
@@ -67,7 +70,7 @@ const changeTodoListTitleCallback = (newTitle: string) => {
 			{
 				tasks.length === 0
 					? <p>Тасок нет</p>
-					: <ul>
+					: <List>
 						{tasks.map((task) => {
 
 							const removeTaskHandler = () => {
@@ -83,31 +86,35 @@ const changeTodoListTitleCallback = (newTitle: string) => {
 								changeTaskTitle(task.id,newTitle, todolistId)
 							}
 
-							return <li key={task.id} className={task.isDone ? 'is-done' : ''}>
-								<input type="checkbox" checked={task.isDone} onChange={changeTaskStatusHandler}/>
-								<EditableSpan changetitleCallback ={changeTaskTitleCallback} title={task.title}/>
-								{/*<Button onClick={removeTaskHandler} title={'x'}/>*/}
+							return <ListItem
+								key={task.id}
+								sx={ {
+									p: 0,
+									justifyContent: 'space-between',
+									opacity: task.isDone ? 0.5 : 1,
+								}}
+							>
+								<div>
+									<Checkbox checked={task.isDone} onChange={changeTaskStatusHandler} />
+									<EditableSpan changetitleCallback ={changeTaskTitleCallback} title={task.title}/>
+								</div>
 
 								<IconButton onClick={removeTaskHandler} aria-label="delete">
 									<DeleteIcon fontSize="small"/>
 								</IconButton>
-							</li>
+							</ListItem>
 						})}
-					</ul>
+					</List>
 			}
 			<div>
-				{/*<Button className={filter === 'all' ? 'active-filter' : '' } title={'All'} onClick={()=> changeFilterTasksHandler('all')}/>*/}
-				{/*<Button className={filter === 'active' ? 'active-filter' : '' } title={'Active'} onClick={()=> changeFilterTasksHandler('active')}/>*/}
-				{/*<Button className={filter === 'completed' ? 'active-filter' : '' } title={'Completed'} onClick={()=> changeFilterTasksHandler('completed')}/>*/}
-
-				<Stack direction="row" spacing={2}>
-
+				<Box sx={{
+					display: 'flex',
+					justifyContent: 'space-between',
+				}}>
 					<Button size="small" variant={filter === 'all' ? "outlined" :"contained" } onClick={()=> changeFilterTasksHandler('all')}color="success" >All</Button>
 					<Button size="small" variant={filter === 'active' ? "outlined" :"contained" } onClick={()=> changeFilterTasksHandler('active')} color="success" >Active</Button>
 					<Button size="small" variant={filter === 'completed' ? "outlined" :"contained" } onClick={()=> changeFilterTasksHandler('completed')} color="success" >Completed</Button>
-
-				</Stack>
-
+				</Box>
 			</div>
 		</div>
 	)
