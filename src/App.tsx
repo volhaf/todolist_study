@@ -7,7 +7,7 @@ import ButtonAppBar from "./ButtonAppBar";
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import {createTheme, Theme, ThemeProvider} from "@mui/material";
+import {createTheme, Theme, ThemeProvider} from "@mui/material/styles";
 
 export type TaskType = {
 	id: string
@@ -127,7 +127,16 @@ const addTodolist= (title: string)=> {
 		)
 	})
 
-	const theme: Theme = createTheme({});
+	const theme: Theme = createTheme({
+		palette: {
+			primary: {
+				main: '#e66666'
+			},
+			secondary: {
+				main: '#fbb988'
+			}
+		}
+	});
 
 
 
