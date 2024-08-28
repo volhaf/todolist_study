@@ -111,9 +111,9 @@ const changeTodoListTitleCallback = (newTitle: string) => {
 					display: 'flex',
 					justifyContent: 'space-between',
 				}}>
-					<Button size="small" variant={filter === 'all' ? "outlined" :"contained" } onClick={()=> changeFilterTasksHandler('all')}color="success" >All</Button>
-					<Button size="small" variant={filter === 'active' ? "outlined" :"contained" } onClick={()=> changeFilterTasksHandler('active')} color="success" >Active</Button>
-					<Button size="small" variant={filter === 'completed' ? "outlined" :"contained" } onClick={()=> changeFilterTasksHandler('completed')} color="success" >Completed</Button>
+					<Button size="small" variant={filter === 'all' ? "outlined" :"contained" } onClick={()=> changeFilterTasksHandler('all')} color="primary" >All</Button>
+					<Button size="small" variant={filter === 'active' ? "outlined" :"contained" } onClick={()=> changeFilterTasksHandler('active')} color="primary" >Active</Button>
+					<Button size="small" variant={filter === 'completed' ? "outlined" :"contained" } onClick={()=> changeFilterTasksHandler('completed')} color="primary" >Completed</Button>
 				</Box>
 			</div>
 		</div>
