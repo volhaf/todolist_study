@@ -60,7 +60,7 @@ const changeTodoListTitleCallback = (newTitle: string) => {
 	return (
 		<div>
 			<h3>
-				<EditableSpan changetitleCallback={changeTodoListTitleCallback} title={title}/>
+				<EditableSpan changeTitleCallback={changeTodoListTitleCallback} title={title}/>
 				<IconButton onClick={()=>removeTodoList(todolistId)} aria-label="delete">
 					<DeleteIcon fontSize="small"/>
 				</IconButton>
@@ -93,7 +93,7 @@ const changeTodoListTitleCallback = (newTitle: string) => {
 							>
 								<div>
 									<Checkbox checked={task.isDone} onChange={changeTaskStatusHandler} />
-									<EditableSpan changetitleCallback ={changeTaskTitleCallback} title={task.title}/>
+									<EditableSpan changeTitleCallback ={changeTaskTitleCallback} title={task.title}/>
 								</div>
 
 								<IconButton onClick={removeTaskHandler} aria-label="delete">
