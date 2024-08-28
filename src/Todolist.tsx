@@ -10,6 +10,7 @@ import {EditableSpan} from "./EditableSpan";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Box from '@mui/material/Box';
+import {filterButtonsContainerSx} from "./TodoList.styles";
 
 
 
@@ -107,10 +108,7 @@ const changeTodoListTitleCallback = (newTitle: string) => {
 					</List>
 			}
 			<div>
-				<Box sx={{
-					display: 'flex',
-					justifyContent: 'space-between',
-				}}>
+				<Box sx={filterButtonsContainerSx}>
 					<Button size="small" variant={filter === 'all' ? "outlined" :"contained" } onClick={()=> changeFilterTasksHandler('all')} color="primary" >All</Button>
 					<Button size="small" variant={filter === 'active' ? "outlined" :"contained" } onClick={()=> changeFilterTasksHandler('active')} color="primary" >Active</Button>
 					<Button size="small" variant={filter === 'completed' ? "outlined" :"contained" } onClick={()=> changeFilterTasksHandler('completed')} color="primary" >Completed</Button>
