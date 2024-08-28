@@ -8,6 +8,7 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import {createTheme, Theme, ThemeProvider} from "@mui/material/styles";
+import {CssBaseline} from "@mui/material";
 
 export type TaskType = {
 	id: string
@@ -26,6 +27,8 @@ export type TodoListType = {
 type TasksStateType = {
 	[todolistId: string] : TaskType[]
 }
+
+type ThemeMode ='dark' | 'light'
 
 function App() {
 
@@ -126,27 +129,30 @@ const addTodolist= (title: string)=> {
 			</Grid>
 		)
 	})
-
+const [themeMode, setThemeMode] = useState<ThemeMode>('light')
 	const theme: Theme = createTheme({
 		palette: {
+			mode: themeMode === 'light' ? 'light' : 'dark',
 			primary: {
 				main: '#e66666'
 			},
 			secondary: {
-				main: '#fbb988'
+				main: '#75dffd'
 			}
 		}
 	});
 
 
-
+const changeModeHandler = () => {
+	setThemeMode(themeMode === 'light' ? 'dark': 'light')
+}
 
 	return (
 		<div className="App">
 
 			<ThemeProvider theme={theme}>
 				<Container fixed>
-					<ButtonAppBar/>
+					<ButtonAppBar onChange={changeModeHandler}/>
 					<Grid container sx={{ml: '60px'}}>
 						<AddItemForm addItem = {addTodolist}/>
 					</Grid>
@@ -154,9 +160,8 @@ const addTodolist= (title: string)=> {
 						{todoListComponents}
 					</Grid>
 				</Container>
+				<CssBaseline/>
 			</ThemeProvider>
-
-
 		</div>
 	)
 }
