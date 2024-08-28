@@ -10,7 +10,7 @@ import {EditableSpan} from "./EditableSpan";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Box from '@mui/material/Box';
-import {filterButtonsContainerSx} from "./TodoList.styles";
+import {filterButtonsContainerSx, getListItemSx} from "./TodoList.styles";
 
 
 
@@ -89,11 +89,7 @@ const changeTodoListTitleCallback = (newTitle: string) => {
 
 							return <ListItem
 								key={task.id}
-								sx={ {
-									p: 0,
-									justifyContent: 'space-between',
-									opacity: task.isDone ? 0.5 : 1,
-								}}
+								sx={ getListItemSx(task.isDone)}
 							>
 								<div>
 									<Checkbox checked={task.isDone} onChange={changeTaskStatusHandler} />

@@ -7,6 +7,7 @@ import ButtonAppBar from "./ButtonAppBar";
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import {createTheme, Theme, ThemeProvider} from "@mui/material";
 
 export type TaskType = {
 	id: string
@@ -126,18 +127,26 @@ const addTodolist= (title: string)=> {
 		)
 	})
 
+	const theme: Theme = createTheme({});
+
+
+
 
 	return (
 		<div className="App">
-			<Container fixed>
-				<ButtonAppBar/>
-				<Grid container sx={{ml: '60px'}}>
-					<AddItemForm addItem = {addTodolist}/>
-				</Grid>
-				<Grid container>
-					{todoListComponents}
-				</Grid>
-</Container>
+
+			<ThemeProvider theme={theme}>
+				<Container fixed>
+					<ButtonAppBar/>
+					<Grid container sx={{ml: '60px'}}>
+						<AddItemForm addItem = {addTodolist}/>
+					</Grid>
+					<Grid container>
+						{todoListComponents}
+					</Grid>
+				</Container>
+			</ThemeProvider>
+
 
 		</div>
 	)
