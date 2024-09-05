@@ -2,6 +2,8 @@ import {addTodolistAC, removeTodolistAC, todolistsReducer} from './todolists-red
 import { v1 } from 'uuid'
 import { TodoListType } from '../App'
 
+
+
 test('correct todolist should be removed', () => {
     let todolistId1 = v1()
     let todolistId2 = v1()
@@ -11,7 +13,6 @@ test('correct todolist should be removed', () => {
         { id: todolistId1, title: 'What to learn', filter: 'all' },
         { id: todolistId2, title: 'What to buy', filter: 'all' },
     ]
-
     // // 2. Действие
     // const action = {
     //     type: 'REMOVE-TODOLIST',
@@ -19,8 +20,6 @@ test('correct todolist should be removed', () => {
     //         id: todolistId1,
     //     },
     // } as const
-
-
     const endState = todolistsReducer(startState, removeTodolistAC(todolistId1))
 
     // 3. Проверяем, что наши действия (изменения state) соответствуют ожиданию
@@ -40,19 +39,10 @@ test('correct todolist should be added', () => {
         { id: todolistId1, title: 'What to learn', filter: 'all' },
         { id: todolistId2, title: 'What to buy', filter: 'all' },
     ]
-
-    // const action = {
-    //     type: 'ADD-TODOLIST',
-    //     payload: {
-    //         title: 'New Todolist',
-    //     },
-    // } as const
-
-
-    const endState = todolistsReducer(startState, addTodolistAC())
+    const endState = todolistsReducer(startState, addTodolistAC('New Todolist'))
 
     expect(endState.length).toBe(3)
-    expect(endState[2].title).toBe(action.payload.title)
+    expect(endState[2].title).toBe('New Todolist')
 })
 
 
