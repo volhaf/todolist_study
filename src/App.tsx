@@ -24,11 +24,11 @@ export type TodoListType = {
 	filter: FilterValuesType
 }
 
-type TasksStateType = {
+export type TasksStateType = {
 	[todolistId: string] : TaskType[]
 }
 
-type ThemeMode ='dark' | 'light'
+export type ThemeMode ='dark' | 'light'
 
 function App() {
 
@@ -61,20 +61,24 @@ function App() {
 				[todolistId]: tasks[todolistId].filter(t => t.id !== taskId)
 			})
 	}
+
 	const addTask = (title: string, todolistId: string) => {
 		const newTask = {id: v1(), title: title, isDone: false}
 		setTasks({...tasks,
 			[todolistId] : [...tasks[todolistId], newTask] })
 	}
+
 	const changeTaskStatus = (taskId: string, taskStatus: boolean, todolistId: string) => {
 		setTasks({...tasks,
 			[todolistId] : tasks[todolistId].map(t => t.id === taskId ? {...t, isDone: taskStatus} : t)
 		})}
+
 	const changeTaskTitle = (taskId: string, title: string, todolistId: string) => {
 		setTasks({...tasks,
 			[todolistId] : tasks[todolistId].map(t => t.id === taskId ? {...t, title} : t)
 		})
 	}
+
 	const changeFilter = (filter: FilterValuesType, todolistId: string) => {
 		setTodolists(todolists.map(tl => tl.id === todolistId ? {...tl, filter: filter} : tl))}
 
@@ -100,7 +104,7 @@ const addTodolist= (title: string)=> {
 }
 
 
-	const todoListComponents: Array<JSX.Element> = todolists.map(tl => {
+const todoListComponents: Array<JSX.Element> = todolists.map(tl => {
 
 		let tasksForTodolist = tasks[tl.id]
 		if (tl.filter === 'active') {
@@ -129,7 +133,9 @@ const addTodolist= (title: string)=> {
 			</Grid>
 		)
 	})
-const [themeMode, setThemeMode] = useState<ThemeMode>('light')
+
+
+	const [themeMode, setThemeMode] = useState<ThemeMode>('light')
 	const theme: Theme = createTheme({
 		palette: {
 			mode: themeMode === 'light' ? 'light' : 'dark',
@@ -165,6 +171,12 @@ const changeModeHandler = () => {
 		</div>
 	)
 }
+
+
+
+
+
+
 
 
 export default App;

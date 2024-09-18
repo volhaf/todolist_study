@@ -5,6 +5,7 @@ import {
     removeTodolistAC,
     todolistsReducer
 } from './todolists-reducer'
+
 import { v1 } from 'uuid'
 import { TodoListType } from '../App'
 
@@ -34,7 +35,6 @@ test('correct todolist should be removed', () => {
     // удалится нужный тудулист, а не любой
     expect(endState[0].id).toBe(todolistId2)
 })
-
 
 
 test('correct todolist should be added', () => {
