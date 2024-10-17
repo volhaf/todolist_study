@@ -62,7 +62,7 @@ function App() {
 	const changeTaskStatus = (taskId: string, taskStatus: boolean, todolistId: string) => {
 		const newTodolistTasks = {
 			...tasks,
-			[todolistId]: tasks[todolistId].map(t => t.id == taskId ? {...t, isDone: taskStatus} : t)
+			[todolistId]: tasks[todolistId].map(t => t.id === taskId ? {...t, isDone: taskStatus} : t)
 		}
 		setTasks(newTodolistTasks)
 	}
@@ -85,6 +85,8 @@ function App() {
 
 	return (
 		<div className="App">
+			<input/> <button>x</button>
+
 			{todolists.map((tl) => {
 
 				const allTodolistTasks = tasks[tl.id]
