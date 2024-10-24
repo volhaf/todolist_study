@@ -3,19 +3,18 @@ import { ChangeEvent, KeyboardEvent, useState } from 'react'
 
 
 type AddItemFormPropsType = {
-	addItem: (itemTitle: string, todolistId: string) => void
-	id: string
+	addItem: (itemTitle: string) => void
 }
 
 
-export function AddItemForm ({addItem, id}: AddItemFormPropsType) {
+export function AddItemForm ({addItem}: AddItemFormPropsType) {
 	const [itemTitle, setItemTitle] = useState('');
 	const [error, setError] = useState<string | null>(null);
 
 
     const addItemHandler = () => {
 		if (itemTitle.trim() !== '') {
-			addItem(itemTitle.trim(), id )
+			addItem(itemTitle.trim())
 			setItemTitle('')
 		} else {
 			setError('Title is required')

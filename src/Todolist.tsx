@@ -39,14 +39,17 @@ export const Todolist = (props: PropsType) => {
 		removeTodolist(todolistId)
 	}
 
+	const addTaskWrap =(title: string) => {
+		addTask(title, todolistId)
+	}
 	return (
 		<div>
 			<div className={"todolist-title-container"}>
 				<h3>{title}</h3>
 				<Button title={'x'} onClick={removeTodolistHandler}/>
 			</div>
-			<AddItemForm id = {todolistId} addItem = {addTask} />
-
+			<AddItemForm addItem = {addTaskWrap} />
+	
 			{
 				tasks.length === 0
 					? <p>Тасок нет</p>

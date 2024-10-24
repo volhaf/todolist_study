@@ -1,3 +1,4 @@
+import { AddItemForm } from './AddItemForm';
 import './App.css';
 import {Todolist} from "./Todolist";
 import {useState} from "react";
@@ -85,7 +86,7 @@ function App() {
 
 	return (
 		<div className="App">
-			<input/> <button>x</button>
+			<AddItemForm addItem={(title)=>{alert(title)}}/>
 
 			{todolists.map((tl) => {
 
