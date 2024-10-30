@@ -1,4 +1,4 @@
-
+import React, { useState } from "react"
 
 type EditableSpanPropsType = {
 	title: string
@@ -6,7 +6,11 @@ type EditableSpanPropsType = {
 }
 
 export function EditableSpan (props: EditableSpanPropsType ) {
- return (
-	<span>{props.title}</span>
+    let [editMode, setEditMode] = useState(false);
+    const activateEditeMode =() => setEditMode(true)
+ return ( 
+    editMode 
+    ? <input value={props.title}/>
+    : <span onDoubleClick={activateEditeMode}>{props.title}</span>
  )
 }
