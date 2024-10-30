@@ -1,19 +1,8 @@
 import {FilterValuesType, TaskType} from "./App";
-import * as React from "react";
-import {ChangeEvent} from "react";
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Checkbox from '@mui/material/Checkbox';
-import Button from '@mui/material/Button';
-import {AddItemForm} from "./AddItemForm";
-import {EditableSpan} from "./EditableSpan";
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import Box from '@mui/material/Box';
-import {filterButtonsContainerSx, getListItemSx} from "./TodoList.styles";
-
-
-
+import {ChangeEvent, KeyboardEvent, useState} from "react";
+import {Button} from "./Button";
+import {AddItemForm } from "./AddItemForm";
+import { EditableSpan } from "./EditableSpan";
 
 type PropsType = {
 	title: string
@@ -22,11 +11,10 @@ type PropsType = {
 	changeFilter: (filter: FilterValuesType, todolistId: string) => void
 	addTask: (title: string, todolistId: string) => void
 	changeTaskStatus: (taskId: string, taskStatus: boolean, todolistId: string) => void
-	removeTodoList: (todolistId: string) => void
+	changeTaskTitle:  (taskId: string, newTitle: string, todolistId: string) => void
 	filter: FilterValuesType
-	todolistId: string
-	changeTaskTitle: (taskId: string, title: string, todolistId: string) => void
-	changeTodoListTitle: (title: string, todolistId: string) => void
+	removeTodolist: (todolistId: string) => void
+	changeTodolistTitle: (todolistId: string, newTitle: string) => void
 }
 
 export const Todolist = (props: PropsType) => {
@@ -38,36 +26,34 @@ export const Todolist = (props: PropsType) => {
 		changeFilter,
 		addTask,
 		changeTaskStatus,
-		removeTodoList,
-		todolistId,
 		changeTaskTitle,
-		changeTodoListTitle
+		todolistId,
+		removeTodolist,
+		changeTodolistTitle
 	} = props
 
-
-	const addTaskCallback = (taskTitle: string) => {
-			addTask(taskTitle, todolistId)
-	}
-const changeTodoListTitleCallback = (newTitle: string) => {
-	changeTodoListTitle(newTitle, todolistId)
-}
-
-
 	const changeFilterTasksHandler = (filter: FilterValuesType) => {
-		changeFilter(filter,todolistId)
+		changeFilter(filter, props.todolistId)
 	}
 
+	const removeTodolistHandler = () => {
+		removeTodolist(todolistId)
+	}
+	const changeTodolistTitleHandler = (newTitle: string) => {
+		changeTodolistTitle(todolistId, newTitle )
+	}
+
+	const addTaskWrap =(title: string) => {
+		addTask(title, todolistId)
+	}
 	return (
 		<div>
-			<h3>
-				<EditableSpan changeTitleCallback={changeTodoListTitleCallback} title={title}/>
-				<IconButton onClick={()=>removeTodoList(todolistId)} aria-label="delete">
-					<DeleteIcon fontSize="small"/>
-				</IconButton>
-			</h3>
-
-
-			<AddItemForm addItem = {addTaskCallback}/>
+			<div className={"todolist-title-container"}>
+				<h3> <EditableSpan title={title} onChange ={changeTodolistTitleHandler}/></h3>
+				<Button title={'x'} onClick={removeTodolistHandler}/>
+			</div>
+			<AddItemForm addItem = {addTaskWrap} />
+	
 			{
 				tasks.length === 0
 					? <p>Тасок нет</p>
@@ -78,28 +64,21 @@ const changeTodoListTitleCallback = (newTitle: string) => {
 								removeTask(task.id, todolistId)
 							}
 
-							const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
+							const onChangeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
 								const newStatusValue = e.currentTarget.checked
-								changeTaskStatus(task.id, newStatusValue,todolistId)
+								changeTaskStatus(task.id, newStatusValue, todolistId)
+							}
+							
+
+							const onChangeTitleHandler = (newValue: string) => {
+								changeTaskTitle(task.id, newValue, todolistId)
 							}
 
-							const changeTaskTitleCallback = (newTitle: string) => {
-								changeTaskTitle(task.id,newTitle, todolistId)
-							}
-
-							return <ListItem
-								key={task.id}
-								sx={ getListItemSx(task.isDone)}
-							>
-								<div>
-									<Checkbox checked={task.isDone} onChange={changeTaskStatusHandler} />
-									<EditableSpan changeTitleCallback ={changeTaskTitleCallback} title={task.title}/>
-								</div>
-
-								<IconButton onClick={removeTaskHandler} aria-label="delete">
-									<DeleteIcon fontSize="small"/>
-								</IconButton>
-							</ListItem>
+							return <li key={task.id} className={task.isDone ? 'is-done' : ''}>
+								<input type="checkbox" checked={task.isDone} onChange={onChangeTaskStatusHandler}/>
+								<EditableSpan title ={task.title} onChange= {onChangeTitleHandler}/>
+								<Button onClick={removeTaskHandler} title={'x'}/>
+							</li>
 						})}
 					</List>
 			}
