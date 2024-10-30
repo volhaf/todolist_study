@@ -44,12 +44,12 @@ function App() {
 		],
 	})
 
-	const removeTask = (taskId: string, todolistId: string) => {
+	function removeTask (taskId: string, todolistId: string) {
 		const newTodolistTasks = {...tasks, [todolistId]: tasks[todolistId].filter(t => t.id !== taskId)}
 		setTasks(newTodolistTasks)
 	}
 
-	const addTask = (title: string, todolistId: string) => {
+	function addTask (title: string, todolistId: string) {
 		const newTask = {
 			id: v1(),
 			title: title,
@@ -60,7 +60,7 @@ function App() {
 	}
 
 
-	const changeTaskStatus = (taskId: string, taskStatus: boolean, todolistId: string) => {
+	function changeTaskStatus (taskId: string, taskStatus: boolean, todolistId: string) {
 		const newTodolistTasks = {
 			...tasks,
 			[todolistId]: tasks[todolistId].map(t => t.id === taskId ? {...t, isDone: taskStatus} : t)
@@ -69,7 +69,7 @@ function App() {
 	}
 
 
-	const changeTaskTitle = (taskId: string, newTitle: string, todolistId: string) => {
+	function changeTaskTitle (taskId: string, newTitle: string, todolistId: string) {
 		let todolistsTasks= tasks[todolistId]; 
 		let task = todolistsTasks.find(t => t.id === taskId);
 		
@@ -81,7 +81,7 @@ function App() {
 
 
 
-	const changeFilter = (filter: FilterValuesType, todolistId: string) => {
+	function changeFilter (filter: FilterValuesType, todolistId: string) {
 		const newTodolists = todolists.map(tl => {
 			return tl.id === todolistId ? {...tl, filter} : tl
 		})
@@ -89,7 +89,7 @@ function App() {
 	}
 
 
-	const removeTodolist = (todolistId: string) => {
+	function removeTodolist (todolistId: string) {
 		const newTodolists = todolists.filter(tl => tl.id !== todolistId)
 		setTodolists(newTodolists)
 
@@ -99,12 +99,11 @@ function App() {
 
 
 	function changeTodolistTitle (todolistId: string, newTitle: string) {
-		const needTodoList = todolists.find(tl => tl.id === todolistId);
-		if (needTodoList) {
-			needTodoList.title = newTitle,
-			setTodolists([...todolists]);
-		}
+		const newTodolists = todolists.map(tl => (tl.id === todolistId ? { ...tl, newTitle } : tl))
+		setTodolists(newTodolists)
 	}
+
+	
 
 
 	function addTodoList (title: string) {
