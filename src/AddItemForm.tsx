@@ -1,4 +1,5 @@
-import { Button } from './Button'
+// import { Button } from './Button'
+import Button from '@mui/material/Button';
 import { ChangeEvent, KeyboardEvent, useState } from 'react'
 
 
@@ -42,7 +43,9 @@ export function AddItemForm ({addItem}: AddItemFormPropsType) {
 	 onChange={changeItemHandler}
 	 onKeyUp={addItemOnKeyUpHandler}
  />
- <Button title={'+'} onClick={addItemHandler}/>
+ {/* <Button title={'+'} onClick={addItemHandler}/> */}
+ <Button onClick={addItemHandler}>+</Button>
+
  {error && <div className={'error-message'}>{error}</div>}
 </div>
 }
