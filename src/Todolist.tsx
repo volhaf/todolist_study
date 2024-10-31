@@ -3,7 +3,7 @@ import {ChangeEvent, KeyboardEvent, useState} from "react";
 import Button from '@mui/material/Button';
 import {AddItemForm } from "./AddItemForm";
 import { EditableSpan } from "./EditableSpan";
-import { IconButton } from "@mui/material";
+import { Checkbox, IconButton } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 
 type PropsType = {
@@ -80,7 +80,7 @@ export const Todolist = (props: PropsType) => {
 							}
 
 							return <li key={task.id} className={task.isDone ? 'is-done' : ''}>
-								<input type="checkbox" checked={task.isDone} onChange={onChangeTaskStatusHandler}/>
+								<Checkbox checked={task.isDone} onChange={onChangeTaskStatusHandler}  color="secondary" size="small"/>
 								<EditableSpan title ={task.title} onChange= {onChangeTitleHandler}/>
 								<IconButton size="small" aria-label="delete" onClick={removeTaskHandler}><Delete fontSize="inherit"/></IconButton>
 							</li>
