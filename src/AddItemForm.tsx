@@ -44,7 +44,7 @@ export function AddItemForm ({addItem}: AddItemFormPropsType) {
 	 onKeyUp={addItemOnKeyUpHandler}
  />
 
- <Button onClick={addItemHandler} variant={'outlined'} color={'secondary'} size={'small'}>+</Button>
+ <Button onClick={addItemHandler} variant="contained" color="primary" size="small">+</Button>
 
  {error && <div className={'error-message'}>{error}</div>}
 </div>
