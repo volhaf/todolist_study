@@ -43,8 +43,8 @@ export function AddItemForm ({addItem}: AddItemFormPropsType) {
 	 onChange={changeItemHandler}
 	 onKeyUp={addItemOnKeyUpHandler}
  />
- {/* <Button title={'+'} onClick={addItemHandler}/> */}
- <Button onClick={addItemHandler}>+</Button>
+
+ <Button onClick={addItemHandler} variant={'outlined'} color={'secondary'} size={'small'}>+</Button>
 
  {error && <div className={'error-message'}>{error}</div>}
 </div>

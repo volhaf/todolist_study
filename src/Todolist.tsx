@@ -3,6 +3,8 @@ import {ChangeEvent, KeyboardEvent, useState} from "react";
 import {Button} from "./Button";
 import {AddItemForm } from "./AddItemForm";
 import { EditableSpan } from "./EditableSpan";
+import { IconButton } from "@mui/material";
+import { Delete } from "@mui/icons-material";
 
 type PropsType = {
 	title: string
@@ -50,8 +52,10 @@ export const Todolist = (props: PropsType) => {
 	return (
 		<div>
 			<div className={"todolist-title-container"}>
-				<h3> <EditableSpan title={title} onChange ={changeTodolistTitleHandler}/></h3>
-				<Button title={'x'} onClick={removeTodolistHandler}/>
+				<h3> 
+				<EditableSpan title={title} onChange ={changeTodolistTitleHandler}/>
+				<IconButton aria-label="delete" onClick={removeTodolistHandler}><Delete/></IconButton>
+				</h3>
 			</div>
 			<AddItemForm addItem = {addTaskWrap} />
 	
