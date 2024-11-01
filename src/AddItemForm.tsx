@@ -1,6 +1,7 @@
-// import { Button } from './Button'
+
+import { AddCard } from '@mui/icons-material';
 import { TextField } from '@mui/material';
-import Button from '@mui/material/Button';
+import { IconButton } from '@mui/material';
 import { ChangeEvent, KeyboardEvent, useState } from 'react'
 
 
@@ -48,8 +49,8 @@ onKeyUp={addItemOnKeyUpHandler}
 helperText= {error}
 />
 
-<Button onClick={addItemHandler} variant="contained" color="primary" size="small">+</Button>
-
- {/* {error && <div className={'error-message'}>{error}</div>} */}
+<IconButton onClick={addItemHandler}color={'primary'}>
+	<AddCard/>
+</IconButton>
 </div>
 }
