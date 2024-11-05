@@ -1,4 +1,4 @@
-import { AppBar, Button, Container, IconButton, Paper, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Button, Container, IconButton, Paper, Toolbar, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { AddItemForm } from './AddItemForm';
 import './App.css';
@@ -6,6 +6,7 @@ import { Todolist } from "./Todolist";
 import { useState } from "react";
 import { v1 } from "uuid";
 import Grid from '@mui/material/Grid2';
+import { MenuButton } from './MenuButton';
 
 export type TaskType = {
 	id: string
@@ -138,7 +139,14 @@ function App() {
 					<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
 						TODOLIST
 					</Typography>
-					<Button color="inherit">Login</Button>
+					<Box 
+					sx={{
+						
+					}}>
+						<MenuButton color="inherit">Login</MenuButton>
+						<MenuButton color="inherit">Logout</MenuButton>
+						<MenuButton color="inherit">FAQ</MenuButton>
+					</Box>
 				</Toolbar>
 			</AppBar>
 			<Grid container spacing={10}>
