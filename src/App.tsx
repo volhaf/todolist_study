@@ -8,6 +8,7 @@ import { v1 } from "uuid";
 import Grid from '@mui/material/Grid2';
 import { MenuButton } from './MenuButton';
 import { deepPurple } from '@mui/material/colors';
+import Switch from '@mui/material/Switch';
 
 export type TaskType = {
 	id: string
@@ -124,6 +125,9 @@ function App() {
 		})
 
 	}
+
+
+	const [mode, setMode] = useState(false)
 const theme = createTheme({
 	
 	palette: {
@@ -131,6 +135,7 @@ const theme = createTheme({
 		  main: '#3949ab',
 		},
 		secondary: deepPurple,
+		mode: mode ? "dark" : "light"
 	  },
 
 })
@@ -151,14 +156,12 @@ const theme = createTheme({
 						<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
 							TODOLIST
 						</Typography>
-						<Box
-							sx={{
-
-							}}>
+						<Box>
 							<MenuButton color="inherit" >Login</MenuButton>
 							<MenuButton color="inherit" >Logout</MenuButton>
 							<MenuButton color="inherit" >FAQ</MenuButton>
 						</Box>
+						<Switch onChange={()=>setMode(!mode)}/>
 					</Toolbar>
 				</AppBar>
 				<Grid container spacing={10}>
