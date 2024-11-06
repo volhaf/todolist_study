@@ -1,4 +1,7 @@
-import { Button } from './Button'
+
+import { AddCard } from '@mui/icons-material';
+import { TextField } from '@mui/material';
+import { IconButton } from '@mui/material';
 import { ChangeEvent, KeyboardEvent, useState } from 'react'
 
 
@@ -35,14 +38,19 @@ export function AddItemForm ({addItem}: AddItemFormPropsType) {
 	}
 
 	
- return  <div>
- <input
-	 className={error ? 'error' : ''}
-	 value={itemTitle}
-	 onChange={changeItemHandler}
-	 onKeyUp={addItemOnKeyUpHandler}
- />
- <Button title={'+'} onClick={addItemHandler}/>
- {error && <div className={'error-message'}>{error}</div>}
+return  <div>
+
+<TextField
+variant={'standard'}
+error ={!!error}
+value={itemTitle}
+onChange={changeItemHandler}
+onKeyUp={addItemOnKeyUpHandler}
+helperText= {error}
+/>
+
+<IconButton onClick={addItemHandler}color={'primary'}>
+	<AddCard/>
+</IconButton>
 </div>
 }

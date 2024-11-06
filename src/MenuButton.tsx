@@ -1,17 +1,21 @@
 import { styled } from '@mui/material/styles'
 import Button from '@mui/material/Button'
+ 
 
-type MenuButtonProps = {
+
+type MenuButtonPropsType = {
     background?: string
+
 }
-export const MenuButton = styled(Button)<MenuButtonProps>(({background,theme})=>({
-    minWidth: '80px',
+export const MenuButton = styled(Button)<MenuButtonPropsType>(({background, theme}) =>  ({
+
+    minWidth: '100px',
     fontWeight: 'bold',
-    boxShadow: `0 0 0 2px ${theme.palette.primary.dark}, 4px 4px 0 0 ${theme.palette.primary.dark}`,
+    boxShadow: '0 0 0 1px #095e7a, 3px 3px 10px 3px #0a4558',
     borderRadius: '5px',
     textTransform: 'capitalize',
     margin: '0 10px',
-    padding: '8px 24px',
-    color: theme.palette.primary.contrastText,
-    background: background || theme.palette.primary.light,
+    padding: '6px 18px',
+    color: '#ffffff',
+    background: background || theme.palette.secondary.light
 }))
