@@ -10,15 +10,16 @@ import { MenuButton } from './MenuButton';
 import { deepPurple } from '@mui/material/colors';
 import Switch from '@mui/material/Switch';
 
+
+//TYPE 
 export type TaskType = {
 	id: string
 	title: string
 	isDone: boolean
 }
-
 export type FilterValuesType = 'all' | 'active' | 'completed'
 
-type TodolistType = {
+export type TodolistType = {
 	id: string
 	title: string
 	filter: FilterValuesType
@@ -27,9 +28,12 @@ type TodolistType = {
 export type TasksStateType = {
 	[key: string]: TaskType[]
 }
+// END TYPE 
+
 
 function App() {
 
+	// Todolist STATE 
 	let todolistID1 = v1()
 	let todolistID2 = v1()
 
@@ -37,7 +41,10 @@ function App() {
 		{ id: todolistID1, title: 'What to learn', filter: 'all' },
 		{ id: todolistID2, title: 'What to buy', filter: 'all' },
 	])
+	// Todolist STATE END
 
+
+	// TASKS STATE 
 	let [tasks, setTasks] = useState<TasksStateType>({
 		[todolistID1]: [
 			{ id: v1(), title: 'HTML&CSS', isDone: true },
@@ -49,43 +56,11 @@ function App() {
 			{ id: v1(), title: 'GraphQL', isDone: false },
 		],
 	})
-
-	function removeTask(taskId: string, todolistId: string) {
-		const newTodolistTasks = { ...tasks, [todolistId]: tasks[todolistId].filter(t => t.id !== taskId) }
-		setTasks(newTodolistTasks)
-	}
-
-	function addTask(title: string, todolistId: string) {
-		const newTask = {
-			id: v1(),
-			title: title,
-			isDone: false
-		}
-		const newTodolistTasks = { ...tasks, [todolistId]: [newTask, ...tasks[todolistId]] }
-		setTasks(newTodolistTasks)
-	}
+	// TASKS STATE END 
 
 
-	function changeTaskStatus(taskId: string, taskStatus: boolean, todolistId: string) {
-		const newTodolistTasks = {
-			...tasks,
-			[todolistId]: tasks[todolistId].map(t => t.id === taskId ? { ...t, isDone: taskStatus } : t)
-		}
-		setTasks(newTodolistTasks)
-	}
 
-
-	function changeTaskTitle(taskId: string, newTitle: string, todolistId: string) {
-		let todolistsTasks = tasks[todolistId];
-		let task = todolistsTasks.find(t => t.id === taskId);
-
-		if (task) {
-			task.title = newTitle;
-			setTasks({ ...tasks })
-		}
-	}
-
-
+	// FUNCTION TODOLIST
 
 	function changeFilter(filter: FilterValuesType, todolistId: string) {
 		const newTodolists = todolists.map(tl => {
@@ -93,8 +68,6 @@ function App() {
 		})
 		setTodolists(newTodolists)
 	}
-
-
 	function removeTodolist(todolistId: string) {
 		const newTodolists = todolists.filter(tl => tl.id !== todolistId)
 		setTodolists(newTodolists)
@@ -102,16 +75,10 @@ function App() {
 		delete tasks[todolistId]
 		setTasks({ ...tasks })
 	}
-
-
 	function changeTodolistTitle(todolistId: string, newTitle: string) {
 		const newTodolists = todolists.map(tl => (tl.id === todolistId ? { ...tl, newTitle } : tl))
 		setTodolists(newTodolists)
 	}
-
-
-
-
 	function addTodoList(title: string) {
 		let todolist: TodolistType = {
 			id: v1(),
@@ -125,24 +92,59 @@ function App() {
 		})
 
 	}
+	// FUNCTION TODOLIST END
 
+
+
+	// FUNCTION TASK
+	function removeTask(taskId: string, todolistId: string) {
+		const newTodolistTasks = { ...tasks, [todolistId]: tasks[todolistId].filter(t => t.id !== taskId) }
+		setTasks(newTodolistTasks)
+	}
+	function addTask(title: string, todolistId: string) {
+		const newTask = {
+			id: v1(),
+			title: title,
+			isDone: false
+		}
+		const newTodolistTasks = { ...tasks, [todolistId]: [newTask, ...tasks[todolistId]] }
+		setTasks(newTodolistTasks)
+	}
+	function changeTaskStatus(taskId: string, taskStatus: boolean, todolistId: string) {
+		const newTodolistTasks = {
+			...tasks,
+			[todolistId]: tasks[todolistId].map(t => t.id === taskId ? { ...t, isDone: taskStatus } : t)
+		}
+		setTasks(newTodolistTasks)
+	}
+	function changeTaskTitle(taskId: string, newTitle: string, todolistId: string) {
+		let todolistsTasks = tasks[todolistId];
+		let task = todolistsTasks.find(t => t.id === taskId);
+
+		if (task) {
+			task.title = newTitle;
+			setTasks({ ...tasks })
+		}
+	}
+	// FUNCTION TASK END
 
 	const [mode, setMode] = useState(false)
-const theme = createTheme({
-	
-	palette: {
-		primary: {
-		  main: '#3949ab',
-		},
-		secondary: deepPurple,
-		mode: mode ? "dark" : "light"
-	  },
+	const theme = createTheme({
 
-})
+		palette: {
+			primary: {
+				main: '#3949ab',
+			},
+			secondary: deepPurple,
+			mode: mode ? "dark" : "light"
+		},
+	})
+
+
 	return (
 		<div className="App">
 			<ThemeProvider theme={theme}>
-				<CssBaseline/>
+				<CssBaseline />
 				<AppBar position="static">
 					<Toolbar>
 						<IconButton
@@ -161,7 +163,7 @@ const theme = createTheme({
 							<MenuButton color="inherit" >Logout</MenuButton>
 							<MenuButton color="inherit" >FAQ</MenuButton>
 						</Box>
-						<Switch onChange={()=>setMode(!mode)}/>
+						<Switch onChange={() => setMode(!mode)} />
 					</Toolbar>
 				</AppBar>
 				<Grid container spacing={10}>
