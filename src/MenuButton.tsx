@@ -5,8 +5,9 @@ import Button from '@mui/material/Button'
 
 type MenuButtonPropsType = {
     background?: string
+
 }
-export const MenuButton = styled(Button)<MenuButtonPropsType>(({background}) =>  ({
+export const MenuButton = styled(Button)<MenuButtonPropsType>(({background, theme}) =>  ({
 
     minWidth: '110px',
     fontWeight: 'bold',
@@ -16,5 +17,5 @@ export const MenuButton = styled(Button)<MenuButtonPropsType>(({background}) => 
     margin: '0 10px',
     padding: '8px 24px',
     color: '#ffffff',
-    background: background || '#147bf0'
+    background: background || theme.palette.secondary.light
 }))
