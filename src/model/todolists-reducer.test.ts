@@ -1,5 +1,5 @@
 
-import { RemoveTodolistActionType, todolistsReducer } from './todolists-reducer'
+import { AddTodolistActionType, RemoveTodolistActionType, todolistsReducer } from './todolists-reducer'
 import { v1 } from 'uuid'
 import { TodolistType } from '../App'
  
@@ -28,3 +28,26 @@ test('correct todolist should be removed', () => {
   // удалится нужный тудулист, а не любой
   expect(endState[0].id).toBe(todolistId2)
 })
+
+
+test('correct todolist should be added', () => {
+    let todolistId1 = v1()
+    let todolistId2 = v1()
+   
+    const startState: TodolistType[] = [
+      { id: todolistId1, title: 'What to learn', filter: 'all' },
+      { id: todolistId2, title: 'What to buy', filter: 'all' },
+    ]
+   
+    const action: AddTodolistActionType = {
+      type: 'ADD-TODOLIST',
+      payload: {
+          title: 'New Todolist',
+          todolistId: todolistId1
+      },
+    }
+    const endState = todolistsReducer(startState, action)
+   
+    expect(endState.length).toBe(3)
+    expect(endState[2].title).toBe(action.payload.title)
+  })
