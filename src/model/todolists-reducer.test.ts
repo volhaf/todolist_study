@@ -1,5 +1,5 @@
 
-import { AddTodolistAC, AddTodolistActionType, ChangeTodolistActionType, ChangeTodolistFilterAC, ChangeTodolistFilterActionType, ChangeTodolistTitleAC, RemoveTodolistAC, RemoveTodolistActionType, todolistsReducer } from './todolists-reducer'
+import { AddTodolistAC,  ChangeTodolistFilterAC,  ChangeTodolistTitleAC, RemoveTodolistAC, todolistsReducer } from './todolists-reducer'
 import { v1 } from 'uuid'
 import { TodolistType } from '../App'
  
@@ -49,9 +49,7 @@ test('correct todolist should change its name', () => {
     expect(endState[1].title).toBe(newTitle)
 })
 
-
-
-  test('correct filter of todolist should be changed', () => {
+test('correct filter of todolist should be changed', () => {
     let todolistId1 = v1()
     let todolistId2 = v1()
    
@@ -65,4 +63,4 @@ test('correct todolist should change its name', () => {
    
     expect(endState[0].filter).toBe('all')
     expect(endState[1].filter).toBe(newFilter)
-  })
+})
