@@ -1,5 +1,5 @@
 
-import { AddTodolistAC, AddTodolistActionType, ChangeTodolistActionType, ChangeTodolistFilterActionType, RemoveTodolistAC, RemoveTodolistActionType, todolistsReducer } from './todolists-reducer'
+import { AddTodolistAC, AddTodolistActionType, ChangeTodolistAC, ChangeTodolistActionType, ChangeTodolistFilterActionType, ChangeTodolistTitleAC, RemoveTodolistAC, RemoveTodolistActionType, todolistsReducer } from './todolists-reducer'
 import { v1 } from 'uuid'
 import { TodolistType } from '../App'
  
@@ -41,19 +41,12 @@ test('correct todolist should change its name', () => {
       { id: todolistId1, title: 'What to learn', filter: 'all' },
       { id: todolistId2, title: 'What to buy', filter: 'all' },
     ]
-   
-    const action: ChangeTodolistActionType = {
-      type: 'CHANGE-TODOLIST-TITLE' as const,
-      payload: {
-        id: todolistId2,
-        title: 'New Todolist',
-        todolistId: todolistId2
-      },
-    }
-    const endState = todolistsReducer(startState, action)
+
+    const newTitle = 'New Todolist'; 
+    const endState = todolistsReducer(startState, ChangeTodolistTitleAC (newTitle , todolistId2))
    
     expect(endState[0].title).toBe('What to learn')
-    expect(endState[1].title).toBe(action.payload.title)
+    expect(endState[1].title).toBe(newTitle)
 })
 
 

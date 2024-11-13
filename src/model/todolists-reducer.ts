@@ -20,7 +20,6 @@ export type ChangeTodolistActionType = {
     payload: {
         todolistId: string
         title: string
-        id: string
     }
 }
 export type ChangeTodolistFilterActionType = {
@@ -69,5 +68,13 @@ export const AddTodolistAC = (title: string, todolistId: string): AddTodolistAct
     payload: {
         title,
         todolistId
+    }
+})
+
+export const ChangeTodolistTitleAC = (title: string, todolistId: string,  ) : ChangeTodolistActionType => ({
+    type: 'CHANGE-TODOLIST-TITLE', 
+    payload: {
+        title,
+        todolistId,
     }
 })
