@@ -3,20 +3,20 @@ import { FilterValuesType, TodolistType } from "../App"
 
 
 export type RemoveTodolistActionType = {
-    type: 'REMOVE-TODOLIST'
+    type: 'REMOVE-TODOLIST',
     payload: {
         todolistId: string
     }
 }
 export type AddTodolistActionType = {
-    type: 'ADD-TODOLIST'
+    type: 'ADD-TODOLIST',
     payload: {
         title: string
         todolistId: string
     }
 }
 export type ChangeTodolistActionType = {
-    type: 'CHANGE-TODOLIST-TITLE'
+    type: 'CHANGE-TODOLIST-TITLE',
     payload: {
         todolistId: string
         title: string
@@ -76,5 +76,14 @@ export const ChangeTodolistTitleAC = (title: string, todolistId: string,  ) : Ch
     payload: {
         title,
         todolistId,
+    }
+})
+
+
+export const ChangeTodolistFilterAC = (todolistId: string, filter: FilterValuesType,): ChangeTodolistFilterActionType => ({
+    type: 'CHANGE-TODOLIST-FILTER',
+    payload: {
+    todolistId,
+    filter
     }
 })
