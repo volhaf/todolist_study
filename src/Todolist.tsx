@@ -61,7 +61,7 @@ export const Todolist = (props: PropsType) => {
 
 			{
 				tasks.length === 0
-					? <p>Тасок нет</p>
+					? <p>There are no tasks</p>
 					: <Box>
 						{tasks.map((task) => {
 
