@@ -29,26 +29,35 @@ export type ChangeTodolistFilterActionType = {
     filter: FilterValuesType,
     },
 }
-type ActionType = RemoveTodolistActionType | AddTodolistActionType | ChangeTodolistActionType | ChangeTodolistFilterActionType
+type ActionType = RemoveTodolistActionType 
+| AddTodolistActionType 
+| ChangeTodolistActionType 
+| ChangeTodolistFilterActionType
 
 export const todolistsReducer = (todolists: Array<TodolistType>, action: ActionType): Array<TodolistType>=> {
 switch (action.type) {
-    case "REMOVE-TODOLIST":
-        return todolists.filter(tl => tl.id !== action.payload.todolistId)
-    case "ADD-TODOLIST":
+    case "REMOVE-TODOLIST":{
+        const {todolistId} = action.payload
+        return todolists.filter(tl => tl.id !== todolistId)
+    }
+    case "ADD-TODOLIST": {
+        const {todolistId, title} = action.payload
         let newtodolist: TodolistType = {
-			id: action.payload.todolistId,
+			id: todolistId,
 			filter: 'all',
-			title: action.payload.title
+			title: title
 		}
         return [ ...todolists, newtodolist]
-    case 'CHANGE-TODOLIST-TITLE' : 
-        return todolists.map(tl => tl.id === action.payload.todolistId ? { ...tl, title: action.payload.title } : tl)
-
-    case 'CHANGE-TODOLIST-FILTER' : 
-    const {filter, todolistId} = action.payload
-    return todolists.map(tl => tl.id === todolistId ? { ...tl, filter } : tl)
-    
+    }
+    case 'CHANGE-TODOLIST-TITLE' : {
+        const {todolistId, title} = action.payload
+        return todolists.map(tl => tl.id === todolistId ? { ...tl, title } : tl)
+    }
+    case 'CHANGE-TODOLIST-FILTER' : {
+        const {filter, todolistId} = action.payload
+        return todolists.map(tl => tl.id === todolistId ? { ...tl, filter } : tl)
+    }
+   
         default:
         return todolists;
 }
