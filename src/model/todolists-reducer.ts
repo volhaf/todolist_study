@@ -68,7 +68,7 @@ export const RemoveTodolistAC = (todolistId: string) : RemoveTodolistActionType 
     type: 'REMOVE-TODOLIST', 
     payload: {
         todolistId 
-    }
+    } as const
 })
 
 
@@ -77,7 +77,7 @@ export const AddTodolistAC = (title: string, todolistId: string): AddTodolistAct
     payload: {
         title,
         todolistId
-    }
+    } as const
 })
 
 export const ChangeTodolistTitleAC = (title: string, todolistId: string,  ) : ChangeTodolistActionType => ({
@@ -85,7 +85,7 @@ export const ChangeTodolistTitleAC = (title: string, todolistId: string,  ) : Ch
     payload: {
         title,
         todolistId,
-    }
+    } as const
 })
 
 
@@ -94,5 +94,5 @@ export const ChangeTodolistFilterAC = (todolistId: string, filter: FilterValuesT
     payload: {
     todolistId,
     filter
-    }
+    } as const
 })
