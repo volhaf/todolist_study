@@ -1,8 +1,8 @@
 import { FilterValuesType, TaskType } from "./App";
 import { ChangeEvent, KeyboardEvent, useState } from "react";
 import Button from '@mui/material/Button';
-import { AddItemForm } from "./AddItemForm";
-import { EditableSpan } from "./EditableSpan";
+import { AddItemForm } from "./components/AddItemForm";
+import { EditableSpan } from "./components/EditableSpan";
 import { Box, Checkbox, IconButton, ListItem, Typography } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 
@@ -54,7 +54,7 @@ export const Todolist = (props: PropsType) => {
 			<div className={"todolist-title-container"}>
 				<Typography align="center" variant="h6"> 
 					<EditableSpan title={title} onChange={changeTodolistTitleHandler} />
-					<IconButton aria-label="delete" onClick={removeTodolistHandler}><Delete /></IconButton>
+					<IconButton aria-label="delete" onClick={removeTodolistHandler}><Delete/></IconButton>
 				</Typography>
 			</div>
 			<AddItemForm addItem={addTaskWrap} />

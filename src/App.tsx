@@ -1,12 +1,12 @@
 import { AppBar, Box, Button, Container, createTheme, CssBaseline, IconButton, Paper, ThemeProvider, Toolbar, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { AddItemForm } from './AddItemForm';
+import { AddItemForm } from './components/AddItemForm';
 import './App.css';
 import { Todolist } from "./Todolist";
 import { useState } from "react";
 import { v1 } from "uuid";
 import Grid from '@mui/material/Grid2';
-import { MenuButton } from './MenuButton';
+import { MenuButton } from './components/MenuButton';
 import { deepPurple } from '@mui/material/colors';
 import Switch from '@mui/material/Switch';
 
