@@ -9,7 +9,12 @@ import Grid from '@mui/material/Grid2';
 import { MenuButton } from './components/MenuButton';
 import { deepPurple } from '@mui/material/colors';
 import Switch from '@mui/material/Switch';
-import {AddTodolistAC, todolistsReducer} from "./model/todolists-reducer";
+import {
+	AddTodolistAC,
+	ChangeTodolistFilterAC,
+	ChangeTodolistTitleAC, RemoveTodolistAC,
+	todolistsReducer
+} from "./model/todolists-reducer";
 
 
 //TYPE 
@@ -50,10 +55,6 @@ const [todolists, dispatchTodolist] = useReducer(todolistsReducer, [
 ])
 
 
-
-
-
-
 	// TASKS STATE 
 	let [tasks, setTasks] = useState<TasksStateType>({
 		[todolistID1]: [
@@ -72,31 +73,30 @@ const [todolists, dispatchTodolist] = useReducer(todolistsReducer, [
 
 	// FUNCTION TODOLIST
 
-	function changeFilter(filter: FilterValuesType, todolistId: string) {
-		const newTodolists = todolists.map(tl => {
-			return tl.id === todolistId ? { ...tl, filter } : tl
-		})
-		setTodolists(newTodolists)
-	}
-	function removeTodolist(todolistId: string) {
-		const newTodolists = todolists.filter(tl => tl.id !== todolistId)
-		setTodolists(newTodolists)
-
-		delete tasks[todolistId]
-		setTasks({ ...tasks })
-	}
-	function changeTodolistTitle(todolistId: string, newTitle: string) {
-		const newTodolists = todolists.map(tl => (tl.id === todolistId ? { ...tl, newTitle } : tl))
-		setTodolists(newTodolists)
-	}
 	function addTodoList(title: string) {
 		const todolistId = v1();
-		// let todolist: TodolistType = {id: todolistId, filter: 'all', title: title};
-		// setTodolists([todolist, ...todolists]);
 		dispatchTodolist(AddTodolistAC(title, todolistId))
+		// в dispatch передаем action, сформированный в AddTodolistAC
 		setTasks({...tasks, [todolistId]: []})
+	}
+
+	function changeFilter(filter: FilterValuesType, todolistId: string) {
+		dispatchTodolist(ChangeTodolistFilterAC(todolistId, filter))
+	}
+
+	function changeTodolistTitle(newTitle: string, todolistId: string) {
+		const action = ChangeTodolistTitleAC(newTitle , todolistId);
+		dispatchTodolist(action);
+	}
+
+	function removeTodolist(todolistId: string) {
+		dispatchTodolist(RemoveTodolistAC(todolistId))
+		delete tasks[todolistId]
+		setTasks({ ...tasks })
 
 	}
+
+
 	// FUNCTION TODOLIST END
 
 
