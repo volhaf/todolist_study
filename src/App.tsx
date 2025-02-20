@@ -3,12 +3,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { AddItemForm } from './components/AddItemForm';
 import './App.css';
 import { Todolist } from "./Todolist";
-import { useState } from "react";
+import {useReducer, useState} from "react";
 import { v1 } from "uuid";
 import Grid from '@mui/material/Grid2';
 import { MenuButton } from './components/MenuButton';
 import { deepPurple } from '@mui/material/colors';
 import Switch from '@mui/material/Switch';
+import {AddTodolistAC, todolistsReducer} from "./model/todolists-reducer";
 
 
 //TYPE 
@@ -37,11 +38,20 @@ function App() {
 	let todolistID1 = v1()
 	let todolistID2 = v1()
 
-	let [todolists, setTodolists] = useState<TodolistType[]>([
-		{ id: todolistID1, title: 'What to learn', filter: 'all' },
-		{ id: todolistID2, title: 'What to buy', filter: 'all' },
-	])
+	// let [todolists, setTodolists] = useState<TodolistType[]>([
+	// 	{ id: todolistID1, title: 'What to learn', filter: 'all' },
+	// 	{ id: todolistID2, title: 'What to buy', filter: 'all' },
+	// ])
 	// Todolist STATE END
+
+const [todolists, dispatchTodolist] = useReducer(todolistsReducer, [
+	{ id: todolistID1, title: 'What to learn', filter: 'all' },
+	{ id: todolistID2, title: 'What to buy', filter: 'all' },
+])
+
+
+
+
 
 
 	// TASKS STATE 
@@ -80,16 +90,11 @@ function App() {
 		setTodolists(newTodolists)
 	}
 	function addTodoList(title: string) {
-		let todolist: TodolistType = {
-			id: v1(),
-			filter: 'all',
-			title: title
-		}
-		setTodolists([todolist, ...todolists]);
-		setTasks({
-			...tasks,
-			[todolist.id]: []
-		})
+		const todolistId = v1();
+		// let todolist: TodolistType = {id: todolistId, filter: 'all', title: title};
+		// setTodolists([todolist, ...todolists]);
+		dispatchTodolist(AddTodolistAC(title, todolistId))
+		setTasks({...tasks, [todolistId]: []})
 
 	}
 	// FUNCTION TODOLIST END
