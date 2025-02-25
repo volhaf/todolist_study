@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Container, createTheme, CssBaseline, IconButton, Paper, ThemeProvider, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, createTheme, CssBaseline, IconButton, Paper, ThemeProvider, Toolbar, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { AddItemForm } from './components/AddItemForm';
 import './App.css';
