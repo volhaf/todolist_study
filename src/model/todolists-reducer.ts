@@ -2,13 +2,20 @@ import { v1 } from "uuid"
 import { FilterValuesType, TodolistType } from "../App"
 
 
-let todolistID1 = v1()
-let todolistID2 = v1()
+export let todolistID1 = v1()
+export let todolistID2 = v1()
 
 const initialState: TodolistType[] = [
 	{id: todolistID1, title: 'What to learn', filter: 'all'},
 	{id: todolistID2, title: 'What to buy', filter: 'all'},
 ]
+
+
+type ActionType = RemoveTodolistActionType
+    | AddTodolistActionType
+    | ChangeTodolistActionType
+    | ChangeTodolistFilterActionType
+
 
 export const todolistsReducer = (todolists: Array<TodolistType> = initialState, action: ActionType): Array<TodolistType>=> {
     switch (action.type) {
@@ -44,10 +51,7 @@ export const todolistsReducer = (todolists: Array<TodolistType> = initialState, 
 // Actions types
 
 export type RemoveTodolistActionType = ReturnType<typeof RemoveTodolistAC>
-
 export type AddTodolistActionType = ReturnType<typeof AddTodolistAC>
-
-
 export type ChangeTodolistActionType = {
     type: 'CHANGE-TODOLIST-TITLE',
     payload: {
@@ -55,6 +59,7 @@ export type ChangeTodolistActionType = {
         title: string
     }
 }
+
 export type ChangeTodolistFilterActionType = {
     type: 'CHANGE-TODOLIST-FILTER',
     payload: {
@@ -62,16 +67,6 @@ export type ChangeTodolistFilterActionType = {
     filter: FilterValuesType,
     },
 }
-
-
-type ActionType = RemoveTodolistActionType 
-| AddTodolistActionType 
-| ChangeTodolistActionType 
-| ChangeTodolistFilterActionType
-
-
-
-
 
 // Action creators
 
@@ -96,7 +91,7 @@ export const ChangeTodolistTitleAC = (title: string, todolistId: string ) : Chan
     payload: {
         title,
         todolistId,
-    } 
+    }
 } as const)
 
 export const ChangeTodolistFilterAC = (todolistId: string, filter: FilterValuesType,): ChangeTodolistFilterActionType => ({

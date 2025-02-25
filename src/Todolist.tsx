@@ -60,10 +60,10 @@ export const Todolist = (props: PropsType) => {
 			<AddItemForm addItem={addTaskWrap} />
 
 			{
-				tasks.length === 0
+				tasks?.length === 0
 					? <p>Тасок нет</p>
 					: <Box>
-						{tasks.map((task) => {
+						{tasks?.map((task) => {
 
 							const removeTaskHandler = () => {
 								removeTask(task.id, todolistId)
