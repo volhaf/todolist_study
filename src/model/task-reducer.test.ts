@@ -1,5 +1,5 @@
 
-import type {TasksStateType} from '../App'
+import type {TasksStateType} from '../app/App'
 import {
     AddTaskAC,
     ChangeTaskStatusAC,

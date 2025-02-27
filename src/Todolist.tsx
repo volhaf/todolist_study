@@ -1,4 +1,4 @@
-import { FilterValuesType, TaskType } from "./App";
+import { FilterValuesType, TaskType } from "./app/App";
 import { ChangeEvent, KeyboardEvent, useState } from "react";
 import Button from '@mui/material/Button';
 import { AddItemForm } from "./components/AddItemForm";

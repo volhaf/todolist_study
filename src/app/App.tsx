@@ -1,12 +1,12 @@
 import { AppBar, Box, Button, Container, createTheme, CssBaseline, IconButton, Paper, ThemeProvider, Toolbar, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { AddItemForm } from './components/AddItemForm';
+import { AddItemForm } from '../components/AddItemForm';
 import './App.css';
-import { Todolist } from "./Todolist";
+import { Todolist } from "../Todolist";
 import {useReducer, useState} from "react";
 import { v1 } from "uuid";
 import Grid from '@mui/material/Grid2';
-import { MenuButton } from './components/MenuButton';
+import { MenuButton } from '../components/MenuButton';
 import { deepPurple } from '@mui/material/colors';
 import Switch from '@mui/material/Switch';
 import {
@@ -14,14 +14,14 @@ import {
 	ChangeTodolistFilterAC,
 	ChangeTodolistTitleAC, RemoveTodolistAC,
 	todolistsReducer
-} from "./model/todolists-reducer";
+} from "../model/todolists-reducer";
 import {
 	AddTaskAC,
 	ChangeTaskStatusAC,
 	ChangeTaskTitleAC,
 	RemoveTaskAC,
 	tasksReducer
-} from "./model/task-reducer";
+} from "../model/task-reducer";
 
 
 //TYPE 
@@ -50,20 +50,20 @@ function App() {
 	let todolistID2 = v1()
 
 const [todolists, dispatchTodolist] = useReducer(todolistsReducer, [
-	{ id: todolistID1, title: 'What to learn', filter: 'all' },
-	{ id: todolistID2, title: 'What to buy', filter: 'all' },
+	// { id: todolistID1, title: 'What to learn', filter: 'all' },
+	// { id: todolistID2, title: 'What to buy', filter: 'all' },
 ])
 	let [tasks, dispatchToTasks] = useReducer(tasksReducer, {
-		[todolistID1]: [
-			{id: '1', title: 'CSS', isDone: false},
-			{id: '2', title: 'JS', isDone: true},
-			{id: '3', title: 'React', isDone: false},
-		],
-		[todolistID2]: [
-			{id: '1', title: 'bread', isDone: false},
-			{id: '2', title: 'milk', isDone: true},
-			{id: '3', title: 'tea', isDone: false},
-		],
+		// [todolistID1]: [
+		// 	{id: '1', title: 'CSS', isDone: false},
+		// 	{id: '2', title: 'JS', isDone: true},
+		// 	{id: '3', title: 'React', isDone: false},
+		// ],
+		// [todolistID2]: [
+		// 	{id: '1', title: 'bread', isDone: false},
+		// 	{id: '2', title: 'milk', isDone: true},
+		// 	{id: '3', title: 'tea', isDone: false},
+		// ],
 	})
 
 
